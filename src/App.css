@@ -1,38 +1,115 @@
-.App {
-  text-align: center;
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap);
+
+* {
+  font-family: Montserrat;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Login start */
+.login_bg {
+  width: 100%;
+  height: auto;
+  background-image: url("https://img.freepik.com/premium-photo/abstract-square-geometric-illustration-background-design_851755-2099.jpg?ga=GA1.1.960358020.1744003470&semt=ais_hybrid&w=740");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: inset 0px 0px 1200px 120px rgba(0, 0, 0, 0.237);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input.form-control:focus,
+textarea.form-control:focus {
+  box-shadow: none !important;
+  outline: none !important;
 }
+/* Login end */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ButtonCom start */
+.button_main {
+  position: relative;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  overflow: hidden;
+  z-index: 1;
+}
+.button.button--aylen {
+  background: #fff;
+  color: #37474f;
+  transition: color 0.3s;
+}
+.button--aylen.button--inverted {
+  background: none;
+  color: #fff;
+}
+.button--aylen::before,
+.button--aylen::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 100%;
+  left: 0;
+  z-index: -1;
+  transition: transform 0.3s cubic-bezier(0.75, 0, 0.125, 1);
+  transform: translateY(0);
+}
+.button--aylen::before {
+  background: #7986cb;
+}
+.button--aylen::after {
+  background: #3f51b5;
+}
+.button--aylen:hover {
+  color: #fff;
+}
+.button--aylen:hover::before,
+.button--aylen:hover::after {
+  transform: translateY(100%);
+}
+.button--aylen:hover::after {
+  transition-delay: 0.175s;
+}
+/* ButtonCom end */
+
+/* Sidebar start */
+.main_form {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
 }
-
-.App-link {
-  color: #61dafb;
+.sidebar {
+  width: 250px;
+  position: relative;
+  height: 100vh;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.fixed-sidebar {
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  height: 100vh;
+}
+.main-content {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+@media (max-width: 767px) {
+  .main-content {
+    margin-top: 80px !important;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
+.sidebar .logout-btn {
+  position: absolute;
+  bottom: 10px;
+}
+.offcanvas-header .btn-close {
+  filter: invert(1);
+}
+.sidebar_menu {
+  transition: all 0.4s ease-in-out;
+}
+.sidebar_menu:hover {
+  color: grey !important;
+}
+.nav-item.active {
+  color: grey !important;
+  font-weight: bold !important;
+}
+/* Sidebar end */
