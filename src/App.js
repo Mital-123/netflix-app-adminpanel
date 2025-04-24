@@ -8,6 +8,7 @@ import Dashboard from './Component/Dashboard';
 import Users from './Component/Users';
 import AddSeason from './Component/AddSeason';
 import NewSeries from './Component/NewSeries';
+import Episodes from './Component/Episodes';
 
 function App() {
 
@@ -31,7 +32,8 @@ function App() {
                     <Route path="/dashboard" element={<Dashboard setlogin={setlogin} />} />
                     <Route path="/user" element={<Users />} />
                     <Route path="/series" element={<NewSeries />} />
-                    <Route path="/season" element={<AddSeason />} />
+                    <Route path="/season/:id" element={<AddSeason />} />
+                    <Route path="/episodes/:id" element={<Episodes />} />
                   </Routes>
                 </div>
               </>
