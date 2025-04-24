@@ -113,3 +113,27 @@ textarea.form-control:focus {
   font-weight: bold !important;
 }
 /* Sidebar end */
+
+/* NewSeries start */
+.series_bg {
+  width: 100%;
+  height: auto;
+  background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?ga=GA1.1.960358020.1744003470&semt=ais_hybrid&w=740");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+.main_card,
+.series_icon {
+  transition: all 0.4s ease-in-out;
+}
+.main_card:hover {
+  box-shadow: 0px 0px 1px 6px grey;
+}
+.series_icon:hover {
+  background-color: white !important;
+  border: 1px solid black !important;
+  color: black !important;
+}
+/* NewSeries end */
