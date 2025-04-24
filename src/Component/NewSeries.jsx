@@ -88,15 +88,6 @@ function Newcopy() {
         showConfirmButton: false,
       });
 
-      setFormData({
-        title: "",
-        description: "",
-        genres: "",
-        releaseDate: "",
-        thumbnail: null,
-        video: null,
-      });
-
       setShowModal(false);
 
     } catch (error) {
