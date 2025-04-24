@@ -57,7 +57,7 @@ function AddSeries() {
     }
 
     const AddSeriesSaveData = () => {
-        if (!obj.seriestittle || !obj.description || !obj.date || !obj.type || !obj.thumbnail) {
+        if (!obj.title || !obj.description || !obj.releaseDate || !obj.genres || !obj.thumbnail || !obj.video) {
             setError("Please fill in all fields.");
             return;
         }
@@ -72,9 +72,9 @@ function AddSeries() {
             // 👇 Add mode
             const updatedArray = [...array, obj];
             setarray(updatedArray);
+            console.log(updatedArray);
             localStorage.setItem('seriesData', JSON.stringify(updatedArray));
         }
-
         closeModal();
     };
 
@@ -90,12 +90,18 @@ function AddSeries() {
         localStorage.setItem('seriesData', JSON.stringify(updatedArray));
     }
 
+    const [playingIndex, setPlayingIndex] = useState(null);
+
+    const handlePlay = (index) => {
+        setPlayingIndex(index);
+    };
+
     return (
         <div className='p-4'>
             <div className='d-flex justify-content-center'>
                 <div><h3 className='fw-bold'>Series List</h3></div>
                 <div className='ms-auto'>
-                    <ButtonCom btn="Add Series" onClick={openModal} />
+                    <ButtonCom btn="Add New Series" onClick={openModal} />
                 </div>
             </div>
 
@@ -104,28 +110,40 @@ function AddSeries() {
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title fw-bold">Add Series</h5>
+                                <h5 className="modal-title fw-bold">Add New Series</h5>
                                 <button type="button" className="btn-close" onClick={closeModal}></button>
                             </div>
                             <div className="modal-body">
                                 <form className='px-2'>
                                     <div className='w-100 mt-2'>
-                                        <label className='fw-medium'>Series Title</label>
-                                        <input type="text" name="seriestittle" className='form-control mt-1 border border-secondary' onChange={addSeriesData} value={obj?.seriestittle || ''} />
+                                        <label className='fw-medium'>Series Name</label>
+                                        <input type="text" name="title" className='form-control mt-1 border border-secondary' onChange={addSeriesData} value={obj?.title || ''} />
                                     </div>
                                     <div className='d-flex justify-content-center gap-3'>
                                         <div className='w-50 mt-2'>
-                                            <label className='fw-medium'>Type</label>
-                                            <input type="text" name="type" className='form-control mt-1 border border-secondary' onChange={addSeriesData} value={obj?.type || ''} />
+                                            <label className='fw-medium'>Genres</label>
+                                            <input type="text" name="genres" placeholder="e.g. Action, Drama" className='form-control mt-1 border border-secondary' onChange={addSeriesData} value={obj?.genres || ''} />
                                         </div>
                                         <div className='w-50 mt-2'>
-                                            <label className='fw-medium'>Date</label>
-                                            <input type="date" name="date" className='form-control mt-1 border border-secondary' onChange={addSeriesData} value={obj?.date || ''} />
+                                            <label className='fw-medium'>Release Date</label>
+                                            <input type="date" name="releaseDate" className='form-control mt-1 border border-secondary' onChange={addSeriesData} value={obj?.releaseDate || ''} />
                                         </div>
                                     </div>
-                                    <div className='w-100 mt-2'>
-                                        <label className='fw-medium'>Thumbnail Image</label>
-                                        <input type="file" name="thumbnail" className='form-control mt-1 border border-secondary' ref={fileInputRef} onChange={addSeriesData} />
+                                    <div className='d-flex justify-content-center gap-3'>
+                                        <div className='w-50 mt-2'>
+                                            <label className='fw-medium'>Thumbnail Image</label>
+                                            <input type="file" name="thumbnail" className='form-control mt-1 border border-secondary' ref={fileInputRef} onChange={addSeriesData} />
+                                        </div>
+                                        <div className='w-50 mt-2'>
+                                            <label className='fw-medium'>Video</label>
+                                            <input
+                                                type="file"
+                                                name="video"
+                                                accept="video/*"
+                                                className='form-control mt-1 border border-secondary'
+                                                onChange={addSeriesData}
+                                            />
+                                        </div>
                                     </div>
                                     <div className='w-100 mt-2'>
                                         <label className='fw-medium'>Description</label>
@@ -142,51 +160,47 @@ function AddSeries() {
                 </div>
             )}
 
-            <div className='table-responsive mt-4'>
-                <table className='table text-center'>
-                    <thead>
-                        <tr>
-                            <th>Series Title</th>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>Thumbnail Image</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {array.map((item, index) => (
-                            <tr key={index}>
-                                <td style={{ width: "20%" }}>{item.seriestittle}</td>
-                                <td style={{ width: "15%" }}>{item.type}</td>
-                                <td style={{ width: "13%" }}>{item.date}</td>
-                                <td style={{ width: "25%" }}>{item.description}</td>
-                                <td style={{ width: "20%" }}>
-                                    {item.thumbnail && (
-                                        <img
-                                            src={item.thumbnail}
-                                            alt=""
-                                            className='img-fluid object-fit-cover'
-                                            style={{ width: '60px', height: '60px' }}
-                                        />
-                                    )}
-                                </td>
-                                <td style={{ width: "7%" }}>
-                                    <button type='button' className='btn btn-sm btn-warning w-100 fw-bold' onClick={() => handleEdit(index)}>Edit</button>
-                                    <button type='button' className='btn btn-sm btn-danger w-100 fw-bold mt-2' onClick={() => handleDelete(index)}>Delete</button>
-                                    <button
-                                        type='button'
-                                        className='btn btn-sm btn-success w-100 fw-bold mt-2'
-                                        onClick={() => navigate('/season', { state: { seriestittle: item.seriestittle } })}
-                                    >
-                                        View
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+            <div className='row p-4'>
+                {array.map((item, index) => (
+                    <div key={index} className='col-12 col-lg-4 mb-4 p-2'>
+                        <div className="h-100 d-flex flex-column shadow border border-dark border-2" style={{ borderRadius: "10px" }}>
+                            <div style={{ width: "100%", height: "200px", overflow: "hidden", position: "relative" }}>
+                                {playingIndex === index ? (
+                                    <video
+                                        src={item.video}
+                                        controls
+                                        autoPlay
+                                        style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "8px 8px 0px 0px" }}
+                                    />
+                                ) : (
+                                    <img
+                                        src={item.thumbnail || "https://via.placeholder.com/300x200?text=No+Image"}
+                                        alt={item.title}
+                                        onClick={() => handlePlay(index)}
+                                        style={{
+                                            width: "100%",
+                                            height: "100%",
+                                            objectFit: "cover",
+                                            borderRadius: "8px 8px 0px 0px",
+                                            cursor: "pointer"
+                                        }}
+                                    />
+                                )}
+                            </div>
+                            <div className='p-3'>
+                                <div className="d-flex align-items-center w-100">
+                                    <div className="fw-medium">Date: {item.releaseDate}</div>
+                                    <div className='ms-auto'>
+                                        <ButtonCom btn="View" />
+                                    </div>
+                                </div>
+                                <div><h4 className='fw-bold mt-2'>{item.title}</h4></div>
+                                <div className='fw-medium fs-5 my-2'>{item.genres}</div>
+                                <p className='mb-2' style={{ wordBreak: "break-all", fontSize: "14px" }}>{item.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     )

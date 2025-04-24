@@ -5,9 +5,10 @@ import Login from './Component/Login';
 import { useEffect, useState } from 'react';
 import Sidebar from './Component/Sidebar';
 import Dashboard from './Component/Dashboard';
-import AddSeries from './Component/AddSeries';
 import Users from './Component/Users';
 import AddSeason from './Component/AddSeason';
+import Series from './Component/Series';
+import NewSeries from './Component/NewSeries';
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
                     <Route path="/" element={<Dashboard setlogin={setlogin} />} />
                     <Route path="/dashboard" element={<Dashboard setlogin={setlogin} />} />
                     <Route path="/user" element={<Users />} />
-                    <Route path="/series" element={<AddSeries />} />
+                    <Route path="/series" element={<NewSeries />} />
                     <Route path="/season" element={<AddSeason />} />
                   </Routes>
                 </div>

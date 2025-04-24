@@ -97,7 +97,7 @@ textarea.form-control:focus {
 }
 .sidebar .logout-btn {
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
 }
 .offcanvas-header .btn-close {
   filter: invert(1);
