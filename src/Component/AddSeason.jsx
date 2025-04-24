@@ -247,7 +247,7 @@ function AddSeason() {
             </div>
 
             <div className='text-center'>
-                <h4 className='fw-bold my-3'>{seriestittle || 'Series Title'}</h4>
+                <h4 className='fw-bold my-3'>{seriestittle || 'Season Title'}</h4>
             </div>
 
             {showModal && (
