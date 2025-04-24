@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ButtonCom from "./Main/ButtonCom";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function NewSeries() {
 
@@ -17,6 +18,9 @@ function NewSeries() {
   const [status, setStatus] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [users, setUsers] = useState([]);
+  const [activeVideoIndex, setActiveVideoIndex] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUsers();
@@ -118,10 +122,12 @@ function NewSeries() {
     }
   };
 
-  const [activeVideoIndex, setActiveVideoIndex] = useState(null);
-
   const handleThumbnailClick = (index) => {
     setActiveVideoIndex(index);
+  };
+
+  const handleViewClick = (seriesId) => {
+    navigate(`/season/${seriesId}`);
   };
 
   return (
@@ -262,9 +268,9 @@ function NewSeries() {
               </div>
               <div className='p-3'>
                 <div className="d-flex align-items-center w-100">
-                  <div className="fw-medium">Date: {item.releaseDate}</div>
+                  <div className="fw-medium">Date: {new Date(item.releaseDate).toISOString().slice(0, 10)}</div>
                   <div className='ms-auto'>
-                    <ButtonCom btn="View" />
+                    <ButtonCom btn="View" onClick={() => handleViewClick(item._id)} />
                   </div>
                 </div>
                 <h4 className='fw-bold mt-2'>{item.title}</h4>
