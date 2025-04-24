@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ButtonCom from "./Main/ButtonCom";
 import Swal from "sweetalert2";
 
-function Newcopy() {
+function NewSeries() {
 
   const [formData, setFormData] = useState({
     title: "",
@@ -16,6 +16,22 @@ function Newcopy() {
 
   const [status, setStatus] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get("https://netflixbackend-dcnc.onrender.com/addseries");
+      setUsers(res.data.data);
+      console.log(res.data.data);
+
+    } catch (err) {
+      console.error("Error fetching users:", err);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -80,6 +96,8 @@ function Newcopy() {
       );
 
       console.log("Upload success:", response.data);
+
+
       Swal.fire({
         icon: 'success',
         title: 'Upload Successful',
@@ -98,6 +116,12 @@ function Newcopy() {
         text: '❌ Something went wrong. Please try again.',
       });
     }
+  };
+
+  const [activeVideoIndex, setActiveVideoIndex] = useState(null);
+
+  const handleThumbnailClick = (index) => {
+    setActiveVideoIndex(index);
   };
 
   return (
@@ -127,7 +151,7 @@ function Newcopy() {
                 ></button>
               </div>
               <div className="modal-body">
-                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <form onSubmit={handleSubmit} encType="multipart/form-data" className="p-2">
                   <div className="d-flex justify-content-center gap-3">
                     <div className="w-50">
                       <label className="fw-medium">Series Name</label>
@@ -150,7 +174,7 @@ function Newcopy() {
                   </div>
 
                   <div className="w-100 mt-2">
-                    <label className="fw-medium">Genres (comma separated)</label>
+                    <label className="fw-medium">Genres (comma separated):</label>
                     <input
                       type="text"
                       name="genres"
@@ -208,8 +232,52 @@ function Newcopy() {
         </div>
       )}
 
+      <div className="row p-4">
+        {users.map((item, index) => (
+          <div key={index} className='col-12 col-lg-4 mb-4 p-2'>
+            <div className="h-100 d-flex flex-column shadow border border-dark border-2" style={{ borderRadius: "10px" }}>
+              <div style={{ width: "100%", height: "200px", overflow: "hidden", borderRadius: "8px 8px 0px 0px", position: "relative" }}>
+                {activeVideoIndex === index ? (
+                  <video
+                    src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video}`}
+                    controls
+                    autoPlay
+                    onPause={() => setActiveVideoIndex(null)}
+                    onEnded={() => setActiveVideoIndex(null)}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                ) : (
+                  <img
+                    src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail}`}
+                    alt="thumbnail"
+                    onClick={() => handleThumbnailClick(index)}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      cursor: "pointer"
+                    }}
+                  />
+                )}
+              </div>
+              <div className='p-3'>
+                <div className="d-flex align-items-center w-100">
+                  <div className="fw-medium">Date: {item.releaseDate}</div>
+                  <div className='ms-auto'>
+                    <ButtonCom btn="View" />
+                  </div>
+                </div>
+                <h4 className='fw-bold mt-2'>{item.title}</h4>
+                <div className='fw-medium fs-5 my-2'>{item.genres}</div>
+                <p className='mb-2' style={{ wordBreak: "break-word", fontSize: "14px" }}>{item.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }
 
-export default Newcopy;
+export default NewSeries;
