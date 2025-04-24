@@ -7,7 +7,6 @@ import Sidebar from './Component/Sidebar';
 import Dashboard from './Component/Dashboard';
 import Users from './Component/Users';
 import AddSeason from './Component/AddSeason';
-import Series from './Component/Series';
 import NewSeries from './Component/NewSeries';
 
 function App() {
