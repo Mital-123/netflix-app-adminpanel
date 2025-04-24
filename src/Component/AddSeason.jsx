@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import ButtonCom from './Main/ButtonCom'
+import { RiDeleteBin5Fill } from 'react-icons/ri';
+import { MdEditSquare } from 'react-icons/md';
 
 function AddSeason() {
 
@@ -62,7 +64,7 @@ function AddSeason() {
                                     <div className="modal-body">
                                         <form className='px-2'>
                                             <div>
-                                                <label htmlFor="" className='fw-medium'>Season Name / Number</label>
+                                                <label htmlFor="" className='fw-medium'>Season </label>
                                                 <input type="text" name="seasonname" id="" className='form-control mt-1 border border-secondary' onChange={addSeasonData} value={obj?.seasonname || ''} />
                                             </div>
                                             <div className='text-center mt-3'>
@@ -80,7 +82,9 @@ function AddSeason() {
                     <table className='table'>
                         <thead>
                             <tr>
-                                <th>Season Name / Number</th>
+                                <th>Season</th>
+
+
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -88,11 +92,18 @@ function AddSeason() {
                         <tbody>
                             {
                                 SeasonArray.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.seasonname}</td>
-                                    </tr>
+                                    <>
+                                        <td>
+                                            Season1
+                                        </td>
+                                        <td className='text-dark fs-1'>
+                                            <span ><RiDeleteBin5Fill/></span>
+                                            <span><MdEditSquare /></span>
+                                        </td>
+                                    </>
                                 ))
                             }
+
                         </tbody>
                     </table>
                 </div>
