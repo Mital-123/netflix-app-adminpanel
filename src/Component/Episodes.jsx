@@ -92,7 +92,6 @@ function Episodes() {
         });
     };
 
-
     useEffect(() => {
         fetchSeasonData();
     }, []);
@@ -137,8 +136,8 @@ function Episodes() {
             )}
 
 
-            <div className='table-responsive mt-4'>
-                <table className='table table-bordered'>
+            <div className=' mt-4'>
+                {/* <table className='table table-bordered'>
                     <thead>
                         <tr>
                             <th>Title</th>
@@ -149,42 +148,82 @@ function Episodes() {
                             <th>Episode Count</th>
                             <th>Delete</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                    </thead> */}
+                    {/* <tbody> */}
                         {SeasonArray.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item.title}</td>
-                                <td>{item.description}</td>
-                                <td>
-                                    <img
-                                        src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
-                                        alt="thumbnail"
-                                        height="50"
-                                    />
-                                </td>
-                                <td>
-                                    <video height="50" controls>
-                                        {/* <source
-                                            src={`https://netflixbackend-dcnc.onrender.com/${item.video.replace(/\\/g, "/").split("uploads/")[1]}`}
-                                            type="video/mp4"
-                                        /> */}
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </td>
-                                <td>{new Date(item.date).toLocaleDateString()}</td>
-                                <td>{item.episodecount}</td>
-                                <td className='text-danger fs-5'>
-                                    <span onClick={() => deleteSeason(item._id)} style={{ cursor: 'pointer' }}>
-                                        <RiDeleteBin5Fill />
-                                    </span>
-                                </td>
-                            </tr>
+                       
+                            
+                            // <tr key={index}>
+                            //     <td>{item.title}</td>
+                            //     <td>{item.description}</td>
+                            //     <td>
+                            //         <img
+                            //             src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
+                            //             alt="thumbnail"
+                            //             height="50"
+                            //         />
+                            //     </td>
+                            //     <td>
+                            //         <video height="50" controls>
+                                      
+                            //             Your browser does not support the video tag.
+                            //         </video>
+                            //     </td>
+                            //     <td>{new Date(item.date).toLocaleDateString()}</td>
+                            //     <td>{item.episodecount}</td>
+                            //     <td className='text-danger fs-5'>
+                            //         <span onClick={() => deleteSeason(item._id)} style={{ cursor: 'pointer' }}>
+                            //             <RiDeleteBin5Fill />
+                            //         </span>
+                            //     </td>
+                            // </tr>
+                            <div className="row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
+                                {console.log(item)
+                                }
+    <div className="col-12 text-info fw-bold mb-2 overflow-hidden">{item.title}</div>
+    <div className="col-12 overflow-hidden">
+      <div className="d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+          <img
+            src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
+            alt="thumbnail"
+            height="50"
+          />
+        </div>
+        <div>
+          <video height="50" controls>
+            <source
+              src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video.replace(/\\/g, "/").split("uploads/")[1]}`}
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div>
+          <div className='text-info'>Episode No.</div>
+          <div>{item.episodecount}</div>
+        </div>
+        <div>
+          <div className='text-info'>Date</div>
+          <div>{new Date(item.date).toLocaleDateString()}</div>
+        </div>
+        <div>
+          <div className='text-info'>Description</div>
+          <div>{item.description}</div>
+        </div>
+      </div>
+    </div>
+  </div>
                         ))}
-                    </tbody>
-                </table>
+                    {/* </tbody> */}
+                {/* </table> */}
             </div>
+
+
+          
         </div>
     );
 }
 
 export default Episodes;
+ 

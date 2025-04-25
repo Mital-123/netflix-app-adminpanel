@@ -137,3 +137,13 @@ textarea.form-control:focus {
   color: black !important;
 }
 /* NewSeries end */
+/* season table css start */
+.tablemedia{
+  width: 50% !important;
+}
+@media screen and (max-width:551px) {
+  .tablemedia{
+    width: 90% !important;
+  }
+}
+/* season table css end */
