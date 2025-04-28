@@ -39,16 +39,6 @@ function Sidebar() {
                     </Nav.Item>
                     <Nav.Item className="mt-3">
                         <Link
-                            to="/user"
-                            className="text-decoration-none nav-item text-white"
-                            onClick={handleLinkClick}
-                        >
-                            <FaUser className="me-2" />
-                            <span className="sidebar_menu">Users</span>
-                        </Link>
-                    </Nav.Item>
-                    <Nav.Item className="mt-3">
-                        <Link
                             to="/series"
                             className="text-decoration-none nav-item text-white"
                             onClick={handleLinkClick}
@@ -82,16 +72,6 @@ function Sidebar() {
                             >
                                 <MdDashboard className="me-2" />
                                 <span className="sidebar_menu">Dashboard</span>
-                            </Link>
-                        </Nav.Item>
-                        <Nav.Item className="mt-3">
-                            <Link
-                                to="/user"
-                                className="text-decoration-none nav-item text-white"
-                                onClick={handleLinkClick}
-                            >
-                                <FaUser className="me-2" />
-                                <span className="sidebar_menu">Users</span>
                             </Link>
                         </Nav.Item>
                         <Nav.Item className="mt-3">

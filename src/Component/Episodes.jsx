@@ -210,19 +210,21 @@ function Episodes() {
                         <div className="row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
                             <div className="col-12 text-info fw-bold fs-5 mb-3 overflow-hidden">{item.title}</div>
                             <div className="col-12 overflow-hidden">
-                                <div className="d-flex justify-content-between flex-wrap gap-3">
+                                <div className="d-flex justify-content-between flex-wrap flex-lg-nowrap gap-4">
                                     <div>
                                         <div className='fw-medium'>Image</div>
                                         <img
                                             src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
                                             alt="thumbnail"
-                                            className='mt-2'
-                                            height="50"
+                                            className='mt-2 object-fit-cover'
+                                            width={"70px"}
+                                            height={"70px"}
                                         />
                                     </div>
                                     <div>
                                         <div className='fw-medium'>Video</div>
-                                        <video height="50" controls className='mt-2'>
+                                        <video width={"70px"}
+                                            height={"70px"} controls className='mt-2'>
                                             <source
                                                 src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video.replace(/\\/g, "/").split("uploads/")[1]}`}
                                                 type="video/mp4"
@@ -231,16 +233,16 @@ function Episodes() {
                                         </video>
                                     </div>
                                     <div>
-                                        <div className='fw-medium'>Episode No.</div>
-                                        <div className='text-secondary mt-2'>{item.episodecount}</div>
+                                        <div className='fw-medium'>Epi.No.</div>
+                                        <div className='text-secondary mt-2' style={{ fontSize: "14px" }}>{item.episodecount}</div>
                                     </div>
                                     <div>
                                         <div className='fw-medium'>Date</div>
-                                        <div className='text-secondary mt-2'>{new Date(item.date).toLocaleDateString()}</div>
+                                        <div className='text-secondary mt-2' style={{ fontSize: "14px" }}>{new Date(item.date).toLocaleDateString()}</div>
                                     </div>
                                     <div>
                                         <div className='fw-medium'>Description</div>
-                                        <div className='text-secondary mt-2'>{item.description}</div>
+                                        <div className='text-secondary mt-2' style={{ fontSize: "14px", wordBreak: "break-all" }}>{item.description}</div>
                                     </div>
                                     <div>
                                         <div className='fw-medium'>Action</div>

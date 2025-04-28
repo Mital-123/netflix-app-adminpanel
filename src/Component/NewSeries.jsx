@@ -268,19 +268,21 @@ function NewSeries() {
                 }
                 <div className="col-12 text-info fs-5 fw-bold mb-3 overflow-hidden">{item.title}</div>
                 <div className="col-12 overflow-hidden">
-                  <div className="d-flex justify-content-between flex-wrap gap-3">
+                  <div className="d-flex justify-content-between flex-wrap flex-lg-nowrap gap-4">
                     <div>
                       <div className='fw-medium'>Image</div>
                       <img
                         src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
                         alt="thumbnail"
-                        height="50"
-                        className="mt-2"
+                        width={"70px"}
+                        height={"70px"}
+                        className="mt-2 object-fit-cover"
                       />
                     </div>
                     <div>
                       <div className='fw-medium'>Video</div>
-                      <video height="50" controls className="mt-2">
+                      <video width={"70px"}
+                        height={"70px"} controls className="mt-2">
                         <source
                           src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video.replace(/\\/g, "/").split("uploads/")[1]}`}
                           type="video/mp4"
@@ -303,12 +305,12 @@ function NewSeries() {
                     <div>
                       <div className='fw-medium'>Action</div>
                       <div className="d-flex justify-content-center gap-2 mt-2">
-                        <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => handleDelete(item._id)} />
                         <FaEye
                           className="text-primary fs-5" style={{ cursor: "pointer" }}
                           title="View"
                           onClick={() => handleViewClick(item._id)}
                         />
+                        <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => handleDelete(item._id)} />
                       </div>
                     </div>
                   </div>

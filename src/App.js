@@ -5,7 +5,6 @@ import Login from './Component/Login';
 import { useEffect, useState } from 'react';
 import Sidebar from './Component/Sidebar';
 import Dashboard from './Component/Dashboard';
-import Users from './Component/Users';
 import AddSeason from './Component/AddSeason';
 import NewSeries from './Component/NewSeries';
 import Episodes from './Component/Episodes';
@@ -30,7 +29,6 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Dashboard setlogin={setlogin} />} />
                     <Route path="/dashboard" element={<Dashboard setlogin={setlogin} />} />
-                    <Route path="/user" element={<Users />} />
                     <Route path="/series" element={<NewSeries />} />
                     <Route path="/season/:id" element={<AddSeason />} />
                     <Route path="/episodes/:id" element={<Episodes />} />
