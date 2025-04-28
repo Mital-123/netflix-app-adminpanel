@@ -5,8 +5,6 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import { MdEditSquare } from "react-icons/md";
-import { Table } from "react-bootstrap";
 
 function NewSeries() {
 
@@ -107,13 +105,14 @@ function NewSeries() {
 
       Swal.fire({
         icon: 'success',
-        title: 'Upload Successful',
+        title: 'Upload Successfull',
         text: '✅ Series added successfully!',
         timer: 8000,
         showConfirmButton: false,
       });
 
       setShowModal(false);
+      fetchUsers();
 
     } catch (error) {
       console.error("Upload failed", error);
@@ -129,13 +128,34 @@ function NewSeries() {
     navigate(`/season/${seriesId}`);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(`https://netflixbackend-dcnc.onrender.com/addseries/${id}`);
+      Swal.fire({
+        icon: 'success',
+        title: 'Series Deleted',
+        text: '✅ Series has been successfully deleted!',
+        timer: 3000,
+        showConfirmButton: false,
+      });
+      setUsers(users.filter(user => user._id !== id));
+    } catch (error) {
+      console.error("Error deleting series:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Deletion Failed',
+        text: '❌ Something went wrong. Please try again.',
+      });
+    }
+  };
+
   return (
     <div className="">
       <div className="container p-4">
 
         <div className='d-flex justify-content-center'>
           <div className="d-none d-md-block d-lg-block"><h3 className='fw-bold text-center'>Series List</h3></div>
-          <div className='ms-auto'>
+          <div className='ms-lg-auto ms-md-auto ms-sm-0 d-flex justify-content-sm-center'>
             <ButtonCom btn="Add New Series" onClick={() => setShowModal(true)} />
           </div>
         </div>
@@ -238,123 +258,68 @@ function NewSeries() {
           </div>
         )}
 
-        {/* <div className="my-4">
-          <div className="table-responsive">
-            <Table size="sm" className="text-center align-middle">
-              <thead className="table-dark">
-                <tr className="" style={{ fontSize: "14px" }}>
-                  <th className="p-3">Series Name</th>
-                  <th className="p-3">Date</th>
-                  <th className="p-3">Genres</th>
-                  <th className="p-3">Description</th>
-                  <th className="p-3">Image</th>
-                  <th className="p-3">Video</th>
-                  <th className="p-3">Action</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {users.map((item, index) => (
-                  <tr key={index} style={{ fontSize: "12px" }}>
-                    <td className="p-2" style={{ width: "15%" }}>{item.title}</td>
-                    <td className="p-2" style={{ width: "10%" }}>{item.releaseDate.slice(0, 10)}</td>
-                    <td className="p-2" style={{ width: "10%" }}>{item.genres}</td>
-                    <td className="p-2" style={{ width: "40%" }}>{item.description}</td>
-                    <td className="p-2" style={{ width: "10%" }}>
+        <div className="my-4 mx-1">
+          {users.length === 0 ? (
+            <div className="text-center fw-medium shadow bg-white rounded p-3">No Series Available.</div>
+          ) : (
+            users.map((item, index) => (
+              <div className="row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
+                {console.log(item)
+                }
+                <div className="col-12 text-info fs-5 fw-bold mb-3 overflow-hidden">{item.title}</div>
+                <div className="col-12 overflow-hidden">
+                  <div className="d-flex justify-content-between flex-wrap gap-3">
+                    <div>
+                      <div className='fw-medium'>Image</div>
                       <img
-                        src={item.thumbnailImage}
+                        src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
                         alt="thumbnail"
-                        className="img-fluid rounded"
-                        style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                        height="50"
+                        className="mt-2"
                       />
-                    </td>
-                    <td className="p-2" style={{ width: "10%" }}>
-                      <video
-                        controls
-                        className="rounded"
-                        style={{ width: "60px", height: "50px" }}
-                      >
-                        <source src={item.video} type="video/mp4" />
+                    </div>
+                    <div>
+                      <div className='fw-medium'>Video</div>
+                      <video height="50" controls className="mt-2">
+                        <source
+                          src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video.replace(/\\/g, "/").split("uploads/")[1]}`}
+                          type="video/mp4"
+                        />
+                        Your browser does not support the video tag.
                       </video>
-                    </td>
-                    <td className="p-2" style={{ width: "10%" }}>
-                      <div className="d-flex justify-content-center gap-2">
-                        <MdEditSquare className="text-warning fs-5 cursor-pointer" title="Edit" />
-                        <RiDeleteBin5Fill className="text-danger fs-5 cursor-pointer" title="Delete" />
+                    </div>
+                    <div>
+                      <div className='fw-medium'>Genres</div>
+                      <div className="text-secondary mt-2" style={{ fontSize: "14px" }}>{item.genres}</div>
+                    </div>
+                    <div>
+                      <div className='fw-medium'>Date</div>
+                      <div className="text-secondary mt-2" style={{ fontSize: "14px" }}>{new Date(item.releaseDate).toLocaleDateString()}</div>
+                    </div>
+                    <div>
+                      <div className='fw-medium'>Description</div>
+                      <div className="text-secondary mt-2" style={{ fontSize: "14px", wordBreak: "break-all" }}>{item.description}</div>
+                    </div>
+                    <div>
+                      <div className='fw-medium'>Action</div>
+                      <div className="d-flex justify-content-center gap-2 mt-2">
+                        <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => handleDelete(item._id)} />
                         <FaEye
-                          className="text-success fs-5 cursor-pointer"
+                          className="text-primary fs-5" style={{ cursor: "pointer" }}
                           title="View"
                           onClick={() => handleViewClick(item._id)}
                         />
                       </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-        </div> */}
-
-        <div className="my-4">
-          {users.map((item, index) => (
-            <div
-              key={index}
-              className="d-flex justify-content-between text-center border rounded p-3 mb-3 flex-wrap shadow"
-              style={{ background: "#f8f9fa", fontSize: "14px", rowGap: "10px" }}
-            >
-              <div style={{ width: "14%" }}>
-                <div><strong>Series Name</strong></div>
-                <div className="mt-2 px-2" style={{ fontSize: "11px" }}>{item.title}</div>
-              </div>
-              <div style={{ width: "12%" }}>
-                <div><strong>Date</strong></div>
-                <div className="mt-2 px-2" style={{ fontSize: "11px" }}>{item.releaseDate.slice(0, 10)}</div>
-              </div>
-              <div style={{ width: "12%" }}>
-                <div><strong>Genres</strong></div>
-                <div className="mt-2 px-2" style={{ fontSize: "11px" }}>{item.genres}</div>
-              </div>
-              <div style={{ width: "27%" }}>
-                <div><strong>Description</strong></div>
-                <div className="mt-2 px-2" style={{ fontSize: "11px" }}>{item.description}</div>
-              </div>
-              <div style={{ width: "12%" }}>
-                <div><strong>Image</strong></div>
-                <img
-                  src={item.thumbnailImage}
-                  alt="thumbnail"
-                  className="img-fluid rounded mt-2 px-2"
-                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
-                />
-              </div>
-              <div style={{ width: "10%" }}>
-                <div><strong>Video</strong></div>
-                <video
-                  controls
-                  className="rounded mt-2"
-                  style={{ width: "60px", height: "60px" }}
-                >
-                  <source src={item.video} type="video/mp4" />
-                </video>
-              </div>
-              <div style={{ width: "13%" }}>
-                <div><strong>Action</strong></div>
-                <div className="d-flex justify-content-center gap-2 mt-2 px-2">
-                  <MdEditSquare className="text-warning fs-5 cursor-pointer" title="Edit" />
-                  <RiDeleteBin5Fill className="text-danger fs-5 cursor-pointer" title="Delete" />
-                  <FaEye
-                    className="text-success fs-5 cursor-pointer"
-                    title="View"
-                    onClick={() => handleViewClick(item._id)}
-                  />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
       </div>
-    </div >
+    </div>
   );
 }
 

@@ -59,7 +59,7 @@ function Sidebar() {
                     </Nav.Item>
                 </Nav>
                 <div className="logout-btn">
-                    <ButtonCom onClick={logout} btn="Log Out" />
+                    <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={logout}>Log Out</button>
                 </div>
             </div>
 
@@ -115,7 +115,7 @@ function Sidebar() {
                     onClick={() => setShowSidebar(true)}
                 />
                 <div className='logout-btn'>
-                    <ButtonCom onClick={logout} btn="Log Out" />
+                    <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={logout}>Log Out</button>
                 </div>
             </div>
         </>

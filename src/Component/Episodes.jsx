@@ -8,7 +8,9 @@ import { RiDeleteBin5Fill } from 'react-icons/ri';
 function Episodes() {
 
     const seasonid = useParams().id;
+
     console.log(seasonid);
+
     const [obj, setObj] = useState({
         title: '',
         description: '',
@@ -17,7 +19,7 @@ function Episodes() {
         date: '',
         episodecount: ''
     });
-    const [SeasonArray, setSeasonArray] = useState([]);
+    const [EpisodeArray, setEpisodeArray] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
     const location = useLocation();
@@ -25,6 +27,20 @@ function Episodes() {
 
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
+
+    useEffect(() => {
+        fetchEpisodeData();
+    }, []);
+
+    const fetchEpisodeData = async () => {
+        try {
+            const res = await axios.get("https://netflixbackend-dcnc.onrender.com/addepisode/");
+            const filteredSeasons = res.data.data.filter((s) => s.season === seasonid);
+            setEpisodeArray(filteredSeasons);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value, files } = e.target;
@@ -35,37 +51,68 @@ function Episodes() {
         }
     };
 
-    const AddSeasonSaveData = async () => {
+    const AddEpisodeSaveData = async (e) => {
+        e.preventDefault();
+
+        if (!obj.title || !obj.description || !obj.thumbnail || !obj.video || !obj.date || !obj.episodecount) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Incomplete Form',
+                text: '❗Please fill all fields before submitting.',
+            });
+            return;
+        }
+
+        Swal.fire({
+            title: 'Uploading...',
+            html: '<b>Uploading: 0%</b>',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
+
         const formData = new FormData();
+
         for (let key in obj) {
             formData.append(key, obj[key]);
         }
-        // formData.append("series", seriesid);
+
         formData.append("season", seasonid);
 
         try {
             const res = await axios.post("https://netflixbackend-dcnc.onrender.com/addepisode", formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+                    'Content-Type': 'multipart/form-data',
+                },
+                onUploadProgress: (progressEvent) => {
+                    const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                    Swal.getHtmlContainer().innerHTML = `<b>Uploading: ${percent}%</b>`;
+                },
             });
 
-            console.log(res.data);
-            setObj({ title: '', description: '', thumbnail: '', video: '', date: '', episodecount: '' });
+            console.log("Upload success:", res.data);
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Upload Successfull',
+                text: '✅ Episode added successfully!',
+                timer: 8000,
+                showConfirmButton: false,
+            });
+
             setShowModal(false);
-            fetchSeasonData();
+            fetchEpisodeData();
+
         } catch (error) {
             console.error("Error saving episode:", error);
-        }
-    };
 
-    const fetchSeasonData = async () => {
-        try {
-            const res = await axios.get("https://netflixbackend-dcnc.onrender.com/addepisode/");
-            const filteredSeasons = res.data.data.filter((s) => s.season === seasonid);
-            setSeasonArray(filteredSeasons);
-        } catch (error) {
-            console.error("Error fetching data:", error);
+            // Display error message if something goes wrong
+            Swal.fire({
+                icon: 'error',
+                title: 'Upload Failed',
+                text: '❌ Something went wrong. Please try again.',
+            });
         }
     };
 
@@ -82,31 +129,29 @@ function Episodes() {
             if (result.isConfirmed) {
                 try {
                     await axios.delete(`https://netflixbackend-dcnc.onrender.com/addepisode/${id}`);
-                    Swal.fire("Deleted!", "The season has been deleted.", "success");
-                    fetchSeasonData(); // Refresh the data after deletion
+                    Swal.fire("Deleted!", "The Episode has been deleted.", "success");
+                    fetchEpisodeData();
                 } catch (error) {
                     console.error("Error deleting season:", error);
-                    Swal.fire("Error!", "There was an issue deleting the season.", "error");
+                    Swal.fire("Error!", "There was an issue deleting the Episode.", "error");
                 }
             }
         });
     };
 
-    useEffect(() => {
-        fetchSeasonData();
-    }, []);
-
     return (
-        <div className='p-4'>
+        <div className='container p-4'>
             <div className='d-flex justify-content-center'>
-                <h3 className='fw-bold'>Episode List</h3>
-                <div className='ms-auto'>
+                <div className='d-none d-md-block d-lg-block'>
+                    <h3 className='fw-bold'>Episode List</h3>
+                </div>
+                <div className='ms-lg-auto ms-md-auto ms-sm-0 d-flex justify-content-sm-center'>
                     <ButtonCom btn="Add Episode" onClick={openModal} />
                 </div>
             </div>
 
             <div className='text-center'>
-                <h4 className='fw-bold my-3'>{seriestittle || 'Episode Title'}</h4>
+                <h4 className='fw-bold my-3'>{seriestittle || 'Season Title'}</h4>
             </div>
 
             {showModal && (
@@ -118,15 +163,37 @@ function Episodes() {
                                 <button type="button" className="btn-close" onClick={closeModal}></button>
                             </div>
                             <div className="modal-body">
-                                <form className='px-2'>
-                                    <input type="text" name="title" placeholder="Title" className='form-control my-2' onChange={handleInputChange} />
-                                    <textarea name="description" placeholder="Description" className='form-control my-2' onChange={handleInputChange}></textarea>
-                                    <input type="file" name="thumbnail" accept="image/*" className='form-control my-2' onChange={handleInputChange} />
-                                    <input type="file" name="video" accept="video/*" className='form-control my-2' onChange={handleInputChange} />
-                                    <input type="date" name="date" className='form-control my-2' onChange={handleInputChange} />
-                                    <input type="number" name="episodecount" placeholder="Episode Count" className='form-control my-2' onChange={handleInputChange} />
-                                    <div className='text-center mt-3'>
-                                        <ButtonCom btn="Save" onClick={AddSeasonSaveData} />
+                                <form className=''>
+                                    <div className='mt-2'>
+                                        <label htmlFor="" className='fw-medium'>Episode Tittle</label>
+                                        <input type="text" name="title" className='form-control w-100 mt-1 border border-secondary' onChange={handleInputChange} />
+                                    </div>
+                                    <div className='d-flex justify-content-center gap-3'>
+                                        <div className='w-50 mt-2'>
+                                            <label htmlFor="" className='fw-medium'>Date</label>
+                                            <input type="date" name="date" className='form-control w-100 mt-1 border border-secondary' onChange={handleInputChange} />
+                                        </div>
+                                        <div className='w-50 mt-2'>
+                                            <label htmlFor="" className='fw-medium'>Episode Number</label>
+                                            <input type="number" name="episodecount" className='form-control w-100 mt-1 border border-secondary' onChange={handleInputChange} />
+                                        </div>
+                                    </div>
+                                    <div className='mt-2'>
+                                        <label htmlFor="" className='fw-medium'>Description</label>
+                                        <textarea name="description" className='form-control w-100 mt-1 border border-secondary' onChange={handleInputChange}></textarea>
+                                    </div>
+                                    <div className='d-flex justify-content-center gap-3'>
+                                        <div className='w-50 mt-2'>
+                                            <label htmlFor="" className='fw-medium'>Image</label>
+                                            <input type="file" name="thumbnail" accept="image/*" className='form-control w-100 mt-1 border border-secondary' onChange={handleInputChange} />
+                                        </div>
+                                        <div className='w-50 mt-2'>
+                                            <label htmlFor="" className='fw-medium'>Video</label>
+                                            <input type="file" name="video" accept="video/*" className='form-control w-100 mt-1 border border-secondary' onChange={handleInputChange} />
+                                        </div>
+                                    </div>
+                                    <div className="mt-3 text-center">
+                                        <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={AddEpisodeSaveData}>Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -135,95 +202,61 @@ function Episodes() {
                 </div>
             )}
 
-
-            <div className=' mt-4'>
-                {/* <table className='table table-bordered'>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Thumbnail</th>
-                            <th>Video</th>
-                            <th>Date</th>
-                            <th>Episode Count</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead> */}
-                    {/* <tbody> */}
-                        {SeasonArray.map((item, index) => (
-                       
-                            
-                            // <tr key={index}>
-                            //     <td>{item.title}</td>
-                            //     <td>{item.description}</td>
-                            //     <td>
-                            //         <img
-                            //             src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
-                            //             alt="thumbnail"
-                            //             height="50"
-                            //         />
-                            //     </td>
-                            //     <td>
-                            //         <video height="50" controls>
-                                      
-                            //             Your browser does not support the video tag.
-                            //         </video>
-                            //     </td>
-                            //     <td>{new Date(item.date).toLocaleDateString()}</td>
-                            //     <td>{item.episodecount}</td>
-                            //     <td className='text-danger fs-5'>
-                            //         <span onClick={() => deleteSeason(item._id)} style={{ cursor: 'pointer' }}>
-                            //             <RiDeleteBin5Fill />
-                            //         </span>
-                            //     </td>
-                            // </tr>
-                            <div className="row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
-                                {console.log(item)
-                                }
-    <div className="col-12 text-info fw-bold mb-2 overflow-hidden">{item.title}</div>
-    <div className="col-12 overflow-hidden">
-      <div className="d-flex justify-content-between align-items-center flex-wrap gap-3">
-        <div>
-          <img
-            src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
-            alt="thumbnail"
-            height="50"
-          />
-        </div>
-        <div>
-          <video height="50" controls>
-            <source
-              src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video.replace(/\\/g, "/").split("uploads/")[1]}`}
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div>
-          <div className='text-info'>Episode No.</div>
-          <div>{item.episodecount}</div>
-        </div>
-        <div>
-          <div className='text-info'>Date</div>
-          <div>{new Date(item.date).toLocaleDateString()}</div>
-        </div>
-        <div>
-          <div className='text-info'>Description</div>
-          <div>{item.description}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-                        ))}
-                    {/* </tbody> */}
-                {/* </table> */}
+            <div className='my-4 mx-1'>
+                {EpisodeArray.length === 0 ? (
+                    <div className="text-center fw-medium shadow bg-white rounded p-3">No Episode Available.</div>
+                ) : (
+                    EpisodeArray.map((item, index) => (
+                        <div className="row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
+                            <div className="col-12 text-info fw-bold fs-5 mb-3 overflow-hidden">{item.title}</div>
+                            <div className="col-12 overflow-hidden">
+                                <div className="d-flex justify-content-between flex-wrap gap-3">
+                                    <div>
+                                        <div className='fw-medium'>Image</div>
+                                        <img
+                                            src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
+                                            alt="thumbnail"
+                                            className='mt-2'
+                                            height="50"
+                                        />
+                                    </div>
+                                    <div>
+                                        <div className='fw-medium'>Video</div>
+                                        <video height="50" controls className='mt-2'>
+                                            <source
+                                                src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video.replace(/\\/g, "/").split("uploads/")[1]}`}
+                                                type="video/mp4"
+                                            />
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                    <div>
+                                        <div className='fw-medium'>Episode No.</div>
+                                        <div className='text-secondary mt-2'>{item.episodecount}</div>
+                                    </div>
+                                    <div>
+                                        <div className='fw-medium'>Date</div>
+                                        <div className='text-secondary mt-2'>{new Date(item.date).toLocaleDateString()}</div>
+                                    </div>
+                                    <div>
+                                        <div className='fw-medium'>Description</div>
+                                        <div className='text-secondary mt-2'>{item.description}</div>
+                                    </div>
+                                    <div>
+                                        <div className='fw-medium'>Action</div>
+                                        <div className="d-flex justify-content-center mt-2">
+                                            <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => deleteSeason(item._id)} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                )}
             </div>
 
-
-          
         </div>
     );
 }
 
-export default Episodes;
- 
+export default Episodes

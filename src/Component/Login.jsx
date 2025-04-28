@@ -13,7 +13,7 @@ function Login(props) {
 
     const logedin = async () => {
         try {
-            const response = await fetch('https://netflixbackend-phi.vercel.app/adminlogin', {
+            const response = await fetch('https://netflixbackend-dcnc.onrender.com/adminlogin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
