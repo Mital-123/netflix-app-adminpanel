@@ -106,8 +106,6 @@ function Episodes() {
 
         } catch (error) {
             console.error("Error saving episode:", error);
-
-            // Display error message if something goes wrong
             Swal.fire({
                 icon: 'error',
                 title: 'Upload Failed',
@@ -146,7 +144,7 @@ function Episodes() {
                     <h3 className='fw-bold'>Episode List</h3>
                 </div>
                 <div className='ms-lg-auto ms-md-auto ms-sm-0 d-flex justify-content-sm-center'>
-                    <ButtonCom btn="Add Episode" onClick={openModal} />
+                    <ButtonCom btn="Add New Episode" onClick={openModal} />
                 </div>
             </div>
 
@@ -159,7 +157,7 @@ function Episodes() {
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title fw-bold">Add Episode</h5>
+                                <h5 className="modal-title fw-bold">Add New Episode</h5>
                                 <button type="button" className="btn-close" onClick={closeModal}></button>
                             </div>
                             <div className="modal-body">
@@ -207,7 +205,7 @@ function Episodes() {
                     <div className="text-center fw-medium shadow bg-white rounded p-3">No Episode Available.</div>
                 ) : (
                     EpisodeArray.map((item, index) => (
-                        <div className="row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
+                        <div className="main_hover border border-3 border-white row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
                             <div className="col-12 text-info fw-bold fs-5 mb-3 overflow-hidden">{item.title}</div>
                             <div className="col-12 overflow-hidden">
                                 <div className="d-flex justify-content-between flex-wrap flex-lg-nowrap gap-4">

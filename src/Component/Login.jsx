@@ -75,7 +75,7 @@ function Login(props) {
                             </div>
                         )}
                         <div className='text-center mt-2'>
-                            <ButtonCom btn="Login" onClick={logedin} />
+                            <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={logedin}>Login</button>
                         </div>
                     </form>
                 </div>

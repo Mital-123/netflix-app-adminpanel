@@ -115,14 +115,20 @@ textarea.form-control:focus {
 /* Sidebar end */
 
 /* NewSeries start */
-
+.main_hover {
+  transition: all 0.3s ease-in-out;
+}
+.main_hover:hover {
+  border: 3px solid #37474f !important;
+}
 /* NewSeries end */
+
 /* season table css start */
-.tablemedia{
+.tablemedia {
   width: 50% !important;
 }
-@media screen and (max-width:551px) {
-  .tablemedia{
+@media screen and (max-width: 551px) {
+  .tablemedia {
     width: 90% !important;
   }
 }

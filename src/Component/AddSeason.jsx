@@ -174,28 +174,9 @@ function AddSeason() {
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setObj((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const AddSeasonSaveData = async () => {
-        if (!obj.seasonname.trim()) return;
-
-        try {
-            const res = await axios.post("https://netflixbackend-dcnc.onrender.com/addseason", {
-                title: obj.seasonname,
-                series_id: seriesId,
-            });
-
-            console.log(res.data);
-            setObj({ seasonname: '' });
-            setShowModal(false);
-            fetchSeasonData();
-        } catch (error) {
-            console.error("Error saving season:", error);
-        }
-    };
+    useEffect(() => {
+        fetchSeasonData();
+    }, []);
 
     const fetchSeasonData = async () => {
         try {
@@ -204,6 +185,51 @@ function AddSeason() {
             setSeasonArray(filteredSeasons);
         } catch (error) {
             console.error("Error fetching data:", error);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setObj((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const AddSeasonSaveData = async () => {
+        if (!obj.seasonname.trim()) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Incomplete Form',
+                text: '❗Please fill all fields before submitting.',
+            });
+            return;
+        }
+
+        try {
+            const res = await axios.post("https://netflixbackend-dcnc.onrender.com/addseason", {
+                title: obj.seasonname,
+                series_id: seriesId,
+            });
+
+            console.log(res.data);
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Upload Successfull',
+                text: '✅ Season added successfully!',
+                timer: 8000,
+                showConfirmButton: false,
+            });
+
+            setObj({ seasonname: '' });
+            setShowModal(false);
+            fetchSeasonData();
+
+        } catch (error) {
+            console.error("Error saving season:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Upload Failed',
+                text: '❌ Something went wrong. Please try again.',
+            });
         }
     };
 
@@ -231,10 +257,6 @@ function AddSeason() {
         });
     };
 
-    useEffect(() => {
-        fetchSeasonData();
-    }, []);
-
     const viewepisode = (seasonid) => {
         navigate(`/episodes/${seasonid}`);
     };
@@ -245,7 +267,7 @@ function AddSeason() {
                     <h3 className='fw-bold'>Season List</h3>
                 </div>
                 <div className='ms-lg-auto ms-md-auto ms-sm-0 d-flex justify-content-sm-center'>
-                    <ButtonCom btn="Add Season" onClick={openModal} />
+                    <ButtonCom btn="Add New Season" onClick={openModal} />
                 </div>
             </div>
 
@@ -258,7 +280,7 @@ function AddSeason() {
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title fw-bold">Add Season</h5>
+                                <h5 className="modal-title fw-bold">Add New Season</h5>
                                 <button type="button" className="btn-close" onClick={closeModal}></button>
                             </div>
                             <div className="modal-body">

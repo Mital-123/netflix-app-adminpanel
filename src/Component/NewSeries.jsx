@@ -263,9 +263,8 @@ function NewSeries() {
             <div className="text-center fw-medium shadow bg-white rounded p-3">No Series Available.</div>
           ) : (
             users.map((item, index) => (
-              <div className="row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
-                {console.log(item)
-                }
+              <div className="main_hover border border-3 border-white row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
+                {console.log(item)}
                 <div className="col-12 text-info fs-5 fw-bold mb-3 overflow-hidden">{item.title}</div>
                 <div className="col-12 overflow-hidden">
                   <div className="d-flex justify-content-between flex-wrap flex-lg-nowrap gap-4">
