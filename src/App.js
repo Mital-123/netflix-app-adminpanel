@@ -8,6 +8,7 @@ import Dashboard from './Component/Dashboard';
 import AddSeason from './Component/AddSeason';
 import NewSeries from './Component/NewSeries';
 import Episodes from './Component/Episodes';
+import AddMovies from './Component/AddMovies';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                     <Route path="/series" element={<NewSeries />} />
                     <Route path="/season/:id" element={<AddSeason />} />
                     <Route path="/episodes/:id" element={<Episodes />} />
+                    <Route path="/movies" element={<AddMovies />} />
                   </Routes>
                 </div>
               </>

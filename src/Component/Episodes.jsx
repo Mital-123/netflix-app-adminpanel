@@ -161,8 +161,8 @@ function Episodes() {
                                 <button type="button" className="btn-close" onClick={closeModal}></button>
                             </div>
                             <div className="modal-body">
-                                <form className=''>
-                                    <div className='mt-2'>
+                                <form className='p-2'>
+                                    <div className=''>
                                         <label htmlFor="" className='fw-medium'>Episode Tittle</label>
                                         <input type="text" name="title" className='form-control w-100 mt-1 border border-secondary' onChange={handleInputChange} />
                                     </div>
@@ -190,7 +190,7 @@ function Episodes() {
                                             <input type="file" name="video" accept="video/*" className='form-control w-100 mt-1 border border-secondary' onChange={handleInputChange} />
                                         </div>
                                     </div>
-                                    <div className="mt-3 text-center">
+                                    <div className="mt-4 text-center">
                                         <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={AddEpisodeSaveData}>Save</button>
                                     </div>
                                 </form>

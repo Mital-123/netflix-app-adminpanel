@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Nav, Offcanvas } from 'react-bootstrap'
-import { MdDashboard } from 'react-icons/md';
+import { MdDashboard, MdMovieCreation } from 'react-icons/md';
 import { TiThList, TiThMenu } from 'react-icons/ti';
 import { Link } from 'react-router-dom'
 
@@ -44,6 +44,16 @@ function Sidebar() {
                             <span className="sidebar_menu">Series List</span>
                         </Link>
                     </Nav.Item>
+                    <Nav.Item className="mt-3">
+                        <Link
+                            to="/movies"
+                            className="text-decoration-none nav-item text-white"
+                            onClick={handleLinkClick}
+                        >
+                            <MdMovieCreation className="me-2" />
+                            <span className="sidebar_menu">Movie List</span>
+                        </Link>
+                    </Nav.Item>
                 </Nav>
                 <div className="logout-btn">
                     <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={logout}>Log Out</button>
@@ -79,6 +89,16 @@ function Sidebar() {
                             >
                                 <TiThList className="me-2" />
                                 <span className="sidebar_menu">Series List</span>
+                            </Link>
+                        </Nav.Item>
+                        <Nav.Item className="mt-3">
+                            <Link
+                                to="/movies"
+                                className="text-decoration-none nav-item text-white"
+                                onClick={handleLinkClick}
+                            >
+                                <MdMovieCreation className="me-2" />
+                                <span className="sidebar_menu">Movie List</span>
                             </Link>
                         </Nav.Item>
                     </Nav>

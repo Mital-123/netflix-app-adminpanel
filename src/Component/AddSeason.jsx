@@ -284,7 +284,7 @@ function AddSeason() {
                                 <button type="button" className="btn-close" onClick={closeModal}></button>
                             </div>
                             <div className="modal-body">
-                                <form className='px-2'>
+                                <form className='p-2'>
                                     <label className='fw-medium'>Season</label>
                                     <input
                                         type="text"
@@ -293,7 +293,7 @@ function AddSeason() {
                                         onChange={handleInputChange}
                                         value={obj.seasonname}
                                     />
-                                    <div className="mt-3 text-center">
+                                    <div className="mt-4 text-center">
                                         <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={AddSeasonSaveData}>Save</button>
                                     </div>
                                 </form>

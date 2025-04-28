@@ -248,7 +248,7 @@ function NewSeries() {
                       </p>
                     )}
 
-                    <div className="mt-3 text-center">
+                    <div className="mt-4 text-center">
                       <button type='submit' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2">Submit</button>
                     </div>
                   </form>
