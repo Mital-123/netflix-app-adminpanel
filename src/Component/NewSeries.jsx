@@ -4,8 +4,9 @@ import ButtonCom from "./Main/ButtonCom";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { MdEdit } from "react-icons/md";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+import { MdEditSquare } from "react-icons/md";
+import { Table } from "react-bootstrap";
 
 function NewSeries() {
 
@@ -21,7 +22,6 @@ function NewSeries() {
   const [status, setStatus] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [users, setUsers] = useState([]);
-  const [activeVideoIndex, setActiveVideoIndex] = useState(null);
 
   const navigate = useNavigate();
 
@@ -125,16 +125,12 @@ function NewSeries() {
     }
   };
 
-  const handleThumbnailClick = (index) => {
-    setActiveVideoIndex(index);
-  };
-
   const handleViewClick = (seriesId) => {
     navigate(`/season/${seriesId}`);
   };
 
   return (
-    <div className="series_bg">
+    <div className="">
       <div className="container p-4">
 
         <div className='d-flex justify-content-center'>
@@ -242,48 +238,115 @@ function NewSeries() {
           </div>
         )}
 
-        <div className="row p-0 p-lg-2 my-3">
-          {users.map((item, index) => (
-            <div key={index} className='col-12 col-lg-4 col-md-6 mb-2 p-2'>
-              <div className="main_card h-100 d-flex flex-column bg-white border border-2 border-secondary" style={{ borderRadius: "10px" }}>
-                <div style={{ width: "100%", height: "170px", overflow: "hidden", borderRadius: "8px 8px 0px 0px", position: "relative" }}>
-                  {activeVideoIndex === index ? (
-                    <video
-                      src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video}`}
-                      controls
-                      autoPlay
-                      onPause={() => setActiveVideoIndex(null)}
-                      onEnded={() => setActiveVideoIndex(null)}
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  ) : (
-                    <img
-                      // src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail}`}
-                      src={"https://img.freepik.com/free-photo/restaurant-interior_1127-3392.jpg?ga=GA1.1.960358020.1744003470&semt=ais_hybrid&w=740"}
-                      alt="thumbnail"
-                      onClick={() => handleThumbnailClick(index)}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        cursor: "pointer"
-                      }}
-                    />
-                  )}
-                </div>
+        {/* <div className="my-4">
+          <div className="table-responsive">
+            <Table size="sm" className="text-center align-middle">
+              <thead className="table-dark">
+                <tr className="" style={{ fontSize: "14px" }}>
+                  <th className="p-3">Series Name</th>
+                  <th className="p-3">Date</th>
+                  <th className="p-3">Genres</th>
+                  <th className="p-3">Description</th>
+                  <th className="p-3">Image</th>
+                  <th className="p-3">Video</th>
+                  <th className="p-3">Action</th>
+                </tr>
+              </thead>
 
-                <div className='p-3'>
-                  <div className="d-flex align-items-center w-100">
-                    <div className="fw-medium">Date: {new Date(item.releaseDate).toISOString().slice(0, 10)}</div>
-                    <div className="ms-auto">
-                      <span className="series_icon text-white border border-dark bg-dark p-2 rounded-2"><MdEdit className="fs-6 fw-bold" /></span>
-                      <span className="series_icon text-white border border-dark ms-1 bg-dark p-2 rounded-2"><RiDeleteBin6Line className="fs-6 fw-bold" /></span>
-                      <span className="series_icon text-white border border-dark ms-1 bg-dark p-2 rounded-2"><FaEye className="fs-6 fw-bold" onClick={() => handleViewClick(item._id)} /></span>
-                    </div>
-                  </div>
-                  <h4 className='fw-bold mt-3'>{item.title}</h4>
-                  <div className='fw-medium fs-6 my-2'>{item.genres}</div>
-                  <p className='mb-2 text-secondary' style={{ wordBreak: "break-word", fontSize: "13px" }}>{item.description}</p>
+              <tbody>
+                {users.map((item, index) => (
+                  <tr key={index} style={{ fontSize: "12px" }}>
+                    <td className="p-2" style={{ width: "15%" }}>{item.title}</td>
+                    <td className="p-2" style={{ width: "10%" }}>{item.releaseDate.slice(0, 10)}</td>
+                    <td className="p-2" style={{ width: "10%" }}>{item.genres}</td>
+                    <td className="p-2" style={{ width: "40%" }}>{item.description}</td>
+                    <td className="p-2" style={{ width: "10%" }}>
+                      <img
+                        src={item.thumbnailImage}
+                        alt="thumbnail"
+                        className="img-fluid rounded"
+                        style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                      />
+                    </td>
+                    <td className="p-2" style={{ width: "10%" }}>
+                      <video
+                        controls
+                        className="rounded"
+                        style={{ width: "60px", height: "50px" }}
+                      >
+                        <source src={item.video} type="video/mp4" />
+                      </video>
+                    </td>
+                    <td className="p-2" style={{ width: "10%" }}>
+                      <div className="d-flex justify-content-center gap-2">
+                        <MdEditSquare className="text-warning fs-5 cursor-pointer" title="Edit" />
+                        <RiDeleteBin5Fill className="text-danger fs-5 cursor-pointer" title="Delete" />
+                        <FaEye
+                          className="text-success fs-5 cursor-pointer"
+                          title="View"
+                          onClick={() => handleViewClick(item._id)}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div> */}
+
+        <div className="my-4">
+          {users.map((item, index) => (
+            <div
+              key={index}
+              className="d-flex justify-content-between text-center border rounded p-3 mb-3 flex-wrap shadow"
+              style={{ background: "#f8f9fa", fontSize: "14px", rowGap: "10px" }}
+            >
+              <div style={{ width: "14%" }}>
+                <div><strong>Series Name</strong></div>
+                <div className="mt-2 px-2" style={{ fontSize: "11px" }}>{item.title}</div>
+              </div>
+              <div style={{ width: "12%" }}>
+                <div><strong>Date</strong></div>
+                <div className="mt-2 px-2" style={{ fontSize: "11px" }}>{item.releaseDate.slice(0, 10)}</div>
+              </div>
+              <div style={{ width: "12%" }}>
+                <div><strong>Genres</strong></div>
+                <div className="mt-2 px-2" style={{ fontSize: "11px" }}>{item.genres}</div>
+              </div>
+              <div style={{ width: "27%" }}>
+                <div><strong>Description</strong></div>
+                <div className="mt-2 px-2" style={{ fontSize: "11px" }}>{item.description}</div>
+              </div>
+              <div style={{ width: "12%" }}>
+                <div><strong>Image</strong></div>
+                <img
+                  src={item.thumbnailImage}
+                  alt="thumbnail"
+                  className="img-fluid rounded mt-2 px-2"
+                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                />
+              </div>
+              <div style={{ width: "10%" }}>
+                <div><strong>Video</strong></div>
+                <video
+                  controls
+                  className="rounded mt-2"
+                  style={{ width: "60px", height: "60px" }}
+                >
+                  <source src={item.video} type="video/mp4" />
+                </video>
+              </div>
+              <div style={{ width: "13%" }}>
+                <div><strong>Action</strong></div>
+                <div className="d-flex justify-content-center gap-2 mt-2 px-2">
+                  <MdEditSquare className="text-warning fs-5 cursor-pointer" title="Edit" />
+                  <RiDeleteBin5Fill className="text-danger fs-5 cursor-pointer" title="Delete" />
+                  <FaEye
+                    className="text-success fs-5 cursor-pointer"
+                    title="View"
+                    onClick={() => handleViewClick(item._id)}
+                  />
                 </div>
               </div>
             </div>
@@ -291,7 +354,7 @@ function NewSeries() {
         </div>
 
       </div>
-    </div>
+    </div >
   );
 }
 
