@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { Nav, Offcanvas } from 'react-bootstrap'
 import { MdDashboard } from 'react-icons/md';
-import { TiThMenu } from 'react-icons/ti';
+import { TiThList, TiThMenu } from 'react-icons/ti';
 import { Link } from 'react-router-dom'
-import ButtonCom from './Main/ButtonCom';
-import { IoMdAdd } from 'react-icons/io';
-import { FaUser } from 'react-icons/fa';
 
 function Sidebar() {
 
@@ -43,7 +40,7 @@ function Sidebar() {
                             className="text-decoration-none nav-item text-white"
                             onClick={handleLinkClick}
                         >
-                            <IoMdAdd className="me-2" />
+                            <TiThList className="me-2" />
                             <span className="sidebar_menu">Series List</span>
                         </Link>
                     </Nav.Item>
@@ -80,7 +77,7 @@ function Sidebar() {
                                 className="text-decoration-none nav-item text-white"
                                 onClick={handleLinkClick}
                             >
-                                <IoMdAdd className="me-2" />
+                                <TiThList className="me-2" />
                                 <span className="sidebar_menu">Series List</span>
                             </Link>
                         </Nav.Item>
@@ -90,7 +87,7 @@ function Sidebar() {
 
             <div className="d-md-none mb-3 position-fixed top-0 start-50 translate-middle-x p-3 z-index-999 w-100 bg-dark d-flex justify-content-between align-items-center">
                 <TiThMenu
-                    className="text-dark bg-secondary fs-1 p-1 rounded-2"
+                    className="text-dark bg-white fs-1 p-1 rounded-2"
                     style={{ width: "35px", height: "35px" }}
                     onClick={() => setShowSidebar(true)}
                 />
