@@ -317,7 +317,7 @@ const AddMovies = () => {
                         );
                     })
                 ) : (
-                    <p className="text-center fw-medium shadow bg-white rounded p-3">No Movies Found.</p>
+                    <p className="text-center fw-medium shadow bg-white rounded p-3">No Movies Available.</p>
                 )}
             </div>
         </div>
