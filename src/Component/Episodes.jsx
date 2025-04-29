@@ -206,7 +206,12 @@ function Episodes() {
                 ) : (
                     EpisodeArray.map((item, index) => (
                         <div className="main_hover border border-3 border-white row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
-                            <div className="col-12 text-info fw-bold fs-5 mb-3 overflow-hidden">{item.title}</div>
+                            <div className='d-flex'>
+                                <div className="col-11 text-info fw-bold fs-5 mb-3 overflow-hidden">{item.title}</div>
+                                <div className="delete_episode-icon ms-auto">
+                                    <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => deleteSeason(item._id)} />
+                                </div>
+                            </div>
                             <div className="col-12 overflow-hidden">
                                 <div className="d-flex justify-content-between flex-wrap flex-lg-nowrap gap-4">
                                     <div>
@@ -241,12 +246,6 @@ function Episodes() {
                                     <div>
                                         <div className='fw-medium'>Description</div>
                                         <div className='text-secondary mt-2' style={{ fontSize: "14px", wordBreak: "break-all" }}>{item.description}</div>
-                                    </div>
-                                    <div>
-                                        <div className='fw-medium'>Action</div>
-                                        <div className="d-flex justify-content-center mt-2">
-                                            <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => deleteSeason(item._id)} />
-                                        </div>
                                     </div>
                                 </div>
                             </div>

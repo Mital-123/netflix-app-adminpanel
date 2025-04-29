@@ -102,7 +102,6 @@ function NewSeries() {
 
       console.log("Upload success:", response.data);
 
-
       Swal.fire({
         icon: 'success',
         title: 'Upload Successfull',

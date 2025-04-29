@@ -133,3 +133,33 @@ textarea.form-control:focus {
   }
 }
 /* season table css end */
+
+/* Episodes start */
+.delete_episode-icon {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.main_hover:hover .delete_episode-icon {
+  opacity: 1;
+}
+/* Episodes end */
+
+/* AddMovies start */
+.main_MovieCard {
+  overflow: hidden;
+  box-shadow: 0px 0px 10px 1px rgba(0, 141, 141, 0.272) !important;
+}
+.movie-delete-icon {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.main_MovieCard:hover .movie-delete-icon {
+  opacity: 1;
+}
+.image_Movie {
+  min-width: 30%;
+}
+.content_movie {
+  min-width: 70%;
+}
+/* AddMovies end */
