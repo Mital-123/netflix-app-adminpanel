@@ -336,7 +336,7 @@ function AddSeason() {
 
             <div className='container table-responsive mt-4 tablemedia'>
                 <table className='table  table-hover align-middle shadow'>
-                    <thead className="table-dark ">
+                    <thead className="table-dark">
                         <tr>
                             <th className='text-center'>Season</th>
                             <th className="text-center">Action</th>
@@ -346,7 +346,7 @@ function AddSeason() {
                         {SeasonArray.length > 0 ? (
                             SeasonArray.map((item, index) => (
                                 <tr key={index} >
-                                    <td className='text-center'>{item.title}</td>
+                                    <td className='text-center' style={{ fontSize: "14px" }}>{item.title}</td>
                                     <td className="text-center">
                                         <span
                                             onClick={() => viewepisode(item._id)}
@@ -370,7 +370,7 @@ function AddSeason() {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="2" className="text-center py-3 fw-medium">
+                                <td colSpan="2" className="text-center py-3 fw-medium" style={{ fontSize: "14px" }}>
                                     No Season Available.
                                 </td>
                             </tr>

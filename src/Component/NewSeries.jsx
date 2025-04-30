@@ -20,10 +20,12 @@ function NewSeries() {
   const [status, setStatus] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     fetchUsers();
   }, []);
 
@@ -36,6 +38,7 @@ function NewSeries() {
     } catch (err) {
       console.error("Error fetching users:", err);
     }
+    setLoading(false);
   };
 
   const handleChange = (e) => {
@@ -122,6 +125,14 @@ function NewSeries() {
       });
     }
   };
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+        <img src="https://media.tenor.com/1s1_eaP6BvgAAAAC/rainbow-spinner-loading.gif" alt="" className='img-fluid bg-white' width={150} />
+      </div>
+    );
+  }
 
   const handleViewClick = (seriesId) => {
     navigate(`/season/${seriesId}`);
@@ -259,7 +270,7 @@ function NewSeries() {
 
         <div className="my-4 mx-1">
           {users.length === 0 ? (
-            <div className="text-center fw-medium shadow bg-white rounded p-3">No Series Available.</div>
+            <div className="text-center fw-medium shadow bg-white rounded p-3" style={{ fontSize: "14px" }}>No Series Available.</div>
           ) : (
             users.map((item, index) => (
               <div className="main_hover border border-3 border-white row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>

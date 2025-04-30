@@ -202,7 +202,7 @@ function Episodes() {
 
             <div className='my-4 mx-1'>
                 {EpisodeArray.length === 0 ? (
-                    <div className="text-center fw-medium shadow bg-white rounded p-3">No Episode Available.</div>
+                    <div className="text-center fw-medium shadow bg-white rounded p-3" style={{ fontSize: "14px" }}>No Episode Available.</div>
                 ) : (
                     EpisodeArray.map((item, index) => (
                         <div className="main_hover border border-3 border-white row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>

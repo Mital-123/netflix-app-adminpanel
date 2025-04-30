@@ -19,9 +19,12 @@ const AddMovies = () => {
     const [showModal, setShowModal] = useState(false);
     const [activeVideoIndex, setActiveVideoIndex] = useState(null);
 
+    const [loading, setLoading] = useState(true);
+
     const chunkSize = 5 * 1024 * 1024;
 
     useEffect(() => {
+        setLoading(true);
         fetchMovies();
     }, []);
 
@@ -44,6 +47,7 @@ const AddMovies = () => {
         } catch (error) {
             console.error('Error fetching movies:', error);
         }
+        setLoading(false);
     };
 
     const handleThumbnailChange = (e) => {
@@ -157,6 +161,14 @@ const AddMovies = () => {
             });
         }
     };
+
+    if (loading) {
+        return (
+            <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+                <img src="https://media.tenor.com/1s1_eaP6BvgAAAAC/rainbow-spinner-loading.gif" alt="" className='img-fluid bg-white' width={150} />
+            </div>
+        );
+    }
 
     const handleThumbnailClick = (index) => {
         setActiveVideoIndex(index);
@@ -298,7 +310,7 @@ const AddMovies = () => {
                                                     {movie.title}
                                                 </div>
                                                 <div className='movie-delete-icon ms-auto' style={{ cursor: "pointer" }}>
-                                                    <RiDeleteBin5Fill className='text-danger fs-4 fw-bold' />
+                                                    <RiDeleteBin5Fill className='text-danger fs-5 fw-bold' />
                                                 </div>
                                             </div>
                                             <div className="mt-2" style={{ fontSize: "15px" }}>
@@ -317,7 +329,7 @@ const AddMovies = () => {
                         );
                     })
                 ) : (
-                    <p className="text-center fw-medium shadow bg-white rounded p-3">No Movies Available.</p>
+                    <p className="text-center fw-medium shadow bg-white rounded p-3" style={{ fontSize: "14px" }}>No Movies Available.</p>
                 )}
             </div>
         </div>
