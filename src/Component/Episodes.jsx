@@ -204,53 +204,62 @@ function Episodes() {
                 {EpisodeArray.length === 0 ? (
                     <div className="text-center fw-medium shadow bg-white rounded p-3" style={{ fontSize: "14px" }}>No Episode Available.</div>
                 ) : (
-                    EpisodeArray.map((item, index) => (
-                        <div className="main_hover border border-3 border-white row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
-                            <div className='d-flex'>
-                                <div className="col-11 text-info fw-bold fs-5 mb-3 overflow-hidden">{item.title}</div>
-                                <div className="delete_episode-icon ms-auto">
-                                    <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => deleteSeason(item._id)} />
-                                </div>
-                            </div>
-                            <div className="col-12 overflow-hidden">
-                                <div className="d-flex justify-content-between flex-wrap flex-lg-nowrap gap-4">
-                                    <div>
-                                        <div className='fw-medium'>Image</div>
-                                        <img
-                                            src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
-                                            alt="thumbnail"
-                                            className='mt-2 object-fit-cover'
-                                            width={"70px"}
-                                            height={"70px"}
-                                        />
+                    EpisodeArray.map((item, index) => {
+                        
+                        const thumbnailpath = item.thumbnail;
+                        const videopath = item.video
+                        const thumbnail = thumbnailpath.split('/').pop();
+                        const video = videopath.split('/').pop();
+
+                        return (
+                            <div className="main_hover border border-3 border-white row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
+                                <div className='d-flex'>
+                                    <div className="col-11 text-info fw-bold fs-5 mb-3 overflow-hidden">{item.title}</div>
+                                    <div className="delete_episode-icon ms-auto">
+                                        <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => deleteSeason(item._id)} />
                                     </div>
-                                    <div>
-                                        <div className='fw-medium'>Video</div>
-                                        <video width={"70px"}
-                                            height={"70px"} controls className='mt-2'>
-                                            <source
-                                                src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video.replace(/\\/g, "/").split("uploads/")[1]}`}
-                                                type="video/mp4"
+                                </div>
+                                <div className="col-12 overflow-hidden">
+                                    <div className="d-flex justify-content-between flex-wrap flex-lg-nowrap gap-4">
+                                        <div>
+                                            <div className='fw-medium'>Image</div>
+                                            <img
+                                                src={`https://netflixbackend-dcnc.onrender.com/uploads/${thumbnail}`}
+                                                alt="thumbnail"
+                                                className='mt-2 object-fit-cover'
+                                                width={"70px"}
+                                                height={"70px"}
                                             />
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
-                                    <div>
-                                        <div className='fw-medium'>Epi.No.</div>
-                                        <div className='text-secondary mt-2' style={{ fontSize: "14px" }}>{item.episodecount}</div>
-                                    </div>
-                                    <div>
-                                        <div className='fw-medium'>Date</div>
-                                        <div className='text-secondary mt-2' style={{ fontSize: "14px" }}>{new Date(item.date).toLocaleDateString()}</div>
-                                    </div>
-                                    <div>
-                                        <div className='fw-medium'>Description</div>
-                                        <div className='text-secondary mt-2' style={{ fontSize: "14px", wordBreak: "break-all" }}>{item.description}</div>
+                                        </div>
+                                        <div>
+                                            <div className='fw-medium'>Video</div>
+                                            <video width={"70px"}
+                                                poster={`https://netflixbackend-dcnc.onrender.com/uploads/${thumbnail}`}
+                                                height={"70px"} controls className='mt-2'>
+                                                <source
+                                                    src={`https://netflixbackend-dcnc.onrender.com/uploads/${video}`}
+                                                    type="video/mp4"
+                                                />
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div>
+                                            <div className='fw-medium'>Epi.No.</div>
+                                            <div className='text-secondary mt-2' style={{ fontSize: "14px" }}>{item.episodecount}</div>
+                                        </div>
+                                        <div>
+                                            <div className='fw-medium'>Date</div>
+                                            <div className='text-secondary mt-2' style={{ fontSize: "14px" }}>{new Date(item.date).toLocaleDateString()}</div>
+                                        </div>
+                                        <div>
+                                            <div className='fw-medium'>Description</div>
+                                            <div className='text-secondary mt-2' style={{ fontSize: "14px", wordBreak: "break-all" }}>{item.description}</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))
+                        )
+                    })
                 )}
             </div>
 

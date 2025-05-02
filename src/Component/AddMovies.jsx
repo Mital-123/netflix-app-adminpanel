@@ -275,6 +275,11 @@ const AddMovies = () => {
             <div className="row my-4 px-2">
                 {movies.length > 0 ? (
                     movies.map((movie, index) => {
+
+                        const thumbnailpath = movie.thumbnailUrl;
+                        const videopath = movie.videoUrl
+                        const thumbnail = thumbnailpath.split('/').pop();
+                        const video = videopath.split('/').pop();
                         return (
                             <div key={index} className='col-12 mx-auto mb-4 main_MovieCard rounded-4'>
                                 <div className='h-100'>
@@ -282,7 +287,7 @@ const AddMovies = () => {
                                         <div className='image_Movie' style={{ width: "100%", height: "170px", overflow: "hidden", borderRadius: "8px", position: "relative" }}>
                                             {activeVideoIndex === index ? (
                                                 <video
-                                                    src={`https://netflixbackend-dcnc.onrender.com/uploads/movie/${movie.videoUrl.replace(/\\/g, "/").split("uploads/")[1]}`}
+                                                    src={`https://netflixbackend-dcnc.onrender.com/uploads/movie/${video}`}
                                                     controls
                                                     autoPlay
                                                     onPause={() => setActiveVideoIndex(null)}
@@ -291,8 +296,7 @@ const AddMovies = () => {
                                                 />
                                             ) : (
                                                 <img
-                                                    src={"https://img.freepik.com/free-photo/restaurant-interior_1127-3394.jpg?ga=GA1.1.960358020.1744003470&semt=ais_hybrid&w=740"}
-                                                    // src={`https://netflixbackend-dcnc.onrender.com/uploads/images/${movie.thumbnailUrl.replace(/\\/g, "/").split("uploads/")[1]}`}
+                                                    src={`https://netflixbackend-dcnc.onrender.com/uploads/images/${thumbnail}`}
                                                     alt="thumbnail"
                                                     onClick={() => handleThumbnailClick(index)}
                                                     style={{
