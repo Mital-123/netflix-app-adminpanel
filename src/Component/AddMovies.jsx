@@ -173,6 +173,29 @@ const AddMovies = () => {
     const handleThumbnailClick = (index) => {
         setActiveVideoIndex(index);
     };
+    const handleMovieDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    // ✅ Corrected DELETE endpoint
+                    await axios.delete(`https://netflixbackend-dcnc.onrender.com/movie/${id}`);
+                    Swal.fire("Deleted!", "The movie has been deleted.", "success");
+                    fetchMovies();
+                } catch (error) {
+                    console.error("Error deleting movie:", error);
+                    Swal.fire("Error!", "There was an issue deleting the movie.", "error");
+                }
+            }
+        });
+    };
 
     return (
         <div className='container p-4'>
@@ -314,7 +337,7 @@ const AddMovies = () => {
                                                     {movie.title}
                                                 </div>
                                                 <div className='movie-delete-icon ms-auto' style={{ cursor: "pointer" }}>
-                                                    <RiDeleteBin5Fill className='text-danger fs-5 fw-bold' />
+                                                    <RiDeleteBin5Fill className='text-danger fs-5 fw-bold' onClick={() => { handleMovieDelete(movie._id) }} />
                                                 </div>
                                             </div>
                                             <div className="mt-2" style={{ fontSize: "15px" }}>
