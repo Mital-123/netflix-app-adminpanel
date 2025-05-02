@@ -97,7 +97,7 @@ function Episodes() {
                 icon: 'success',
                 title: 'Upload Successfull',
                 text: '✅ Episode added successfully!',
-                timer: 8000,
+                timer: 2000,
                 showConfirmButton: false,
             });
 

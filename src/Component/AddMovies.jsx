@@ -136,7 +136,7 @@ const AddMovies = () => {
                 icon: 'success',
                 title: 'Upload Successfull',
                 text: '✅ Movie added successfully!',
-                timer: 8000,
+                timer: 2000,
                 showConfirmButton: true
             });
 
