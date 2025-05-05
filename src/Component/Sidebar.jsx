@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Nav, Offcanvas } from 'react-bootstrap'
-import { MdDashboard, MdMovieCreation } from 'react-icons/md';
+import { MdMovieCreation } from 'react-icons/md';
 import { TiThList, TiThMenu } from 'react-icons/ti';
 import { Link } from 'react-router-dom'
 
@@ -24,16 +24,6 @@ function Sidebar() {
                     <h3 className='text-white'>Admin Panel</h3>
                 </div>
                 <Nav className="flex-column p-2 pt-0">
-                    <Nav.Item className="mt-3">
-                        <Link
-                            to="/"
-                            className="text-decoration-none nav-item text-white"
-                            onClick={handleLinkClick}
-                        >
-                            <MdDashboard className="me-2" />
-                            <span className="sidebar_menu">Dashboard</span>
-                        </Link>
-                    </Nav.Item>
                     <Nav.Item className="mt-3">
                         <Link
                             to="/series"
@@ -71,16 +61,6 @@ function Sidebar() {
                         <h2 className='text-white'>Admin Panel</h2>
                     </div>
                     <Nav className="flex-column p-2">
-                        <Nav.Item className="mt-3">
-                            <Link
-                                to="/"
-                                className="text-decoration-none nav-item text-white"
-                                onClick={handleLinkClick}
-                            >
-                                <MdDashboard className="me-2" />
-                                <span className="sidebar_menu">Dashboard</span>
-                            </Link>
-                        </Nav.Item>
                         <Nav.Item className="mt-3">
                             <Link
                                 to="/series"

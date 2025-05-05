@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ButtonCom from './Main/ButtonCom';
 import { FaMailBulk } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';

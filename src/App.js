@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Component/Login';
 import { useEffect, useState } from 'react';
 import Sidebar from './Component/Sidebar';
-import Dashboard from './Component/Dashboard';
 import AddSeason from './Component/AddSeason';
 import NewSeries from './Component/NewSeries';
 import Episodes from './Component/Episodes';
@@ -28,9 +27,8 @@ function App() {
                 <Sidebar />
                 <div className='main-content flex-grow-1'>
                   <Routes>
-                    <Route path="/" element={<Dashboard setlogin={setlogin} />} />
-                    <Route path="/dashboard" element={<Dashboard setlogin={setlogin} />} />
-                    <Route path="/series" element={<NewSeries />} />
+                    <Route path="/" element={<NewSeries setlogin={setlogin} />} />
+                    <Route path="/series" element={<NewSeries setlogin={setlogin} />} />
                     <Route path="/season/:id" element={<AddSeason />} />
                     <Route path="/episodes/:id" element={<Episodes />} />
                     <Route path="/movies" element={<AddMovies />} />
