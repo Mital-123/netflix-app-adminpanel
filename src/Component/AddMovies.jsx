@@ -91,6 +91,7 @@ const AddMovies = () => {
                 icon: 'error',
                 title: 'Error',
                 text: '❗Please select a video file first.',
+                allowOutsideClick: false,
             });
             return;
         }
@@ -100,6 +101,7 @@ const AddMovies = () => {
                 icon: 'warning',
                 title: 'Incomplete Form',
                 text: '❗Please fill all fields before submitting.',
+                allowOutsideClick: false,
             });
             return;
         }
@@ -182,16 +184,17 @@ const AddMovies = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
+            allowOutsideClick: false,
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
                     // ✅ Corrected DELETE endpoint
                     await axios.delete(`https://netflixbackend-dcnc.onrender.com/movie/${id}`);
-                    Swal.fire("Deleted!", "The movie has been deleted.", "success");
+                    Swal.fire("Deleted!", "✅ The movie has been deleted.", "success");
                     fetchMovies();
                 } catch (error) {
                     console.error("Error deleting movie:", error);
-                    Swal.fire("Error!", "There was an issue deleting the movie.", "error");
+                    Swal.fire("Error!", "❌ There was an issue deleting the movie.", "error");
                 }
             }
         });

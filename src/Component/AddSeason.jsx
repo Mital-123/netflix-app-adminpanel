@@ -199,6 +199,7 @@ function AddSeason() {
                 icon: 'warning',
                 title: 'Incomplete Form',
                 text: '❗Please fill all fields before submitting.',
+                allowOutsideClick: false,
             });
             return;
         }
@@ -247,11 +248,11 @@ function AddSeason() {
             if (result.isConfirmed) {
                 try {
                     await axios.delete(`https://netflixbackend-dcnc.onrender.com/addseason/${id}`);
-                    Swal.fire("Deleted!", "The season has been deleted.", "success");
+                    Swal.fire("Deleted!", "✅ The season has been deleted.", "success");
                     fetchSeasonData();
                 } catch (error) {
                     console.error("Error deleting season:", error);
-                    Swal.fire("Error!", "There was an issue deleting the season.", "error");
+                    Swal.fire("Error!", "❌ There was an issue deleting the season.", "error");
                 }
             }
         });

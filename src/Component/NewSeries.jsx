@@ -65,6 +65,7 @@ function NewSeries() {
         icon: 'warning',
         title: 'Incomplete Form',
         text: '❗Please fill all fields before submitting.',
+        allowOutsideClick: false,
       });
       return;
     }
@@ -139,24 +140,27 @@ function NewSeries() {
   };
 
   const handleDelete = async (id) => {
-    try {
-      const response = await axios.delete(`https://netflixbackend-dcnc.onrender.com/addseries/${id}`);
-      Swal.fire({
-        icon: 'success',
-        title: 'Series Deleted',
-        text: '✅ Series has been successfully deleted!',
-        timer: 3000,
-        showConfirmButton: false,
-      });
-      setUsers(users.filter(user => user._id !== id));
-    } catch (error) {
-      console.error("Error deleting series:", error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Deletion Failed',
-        text: '❌ Something went wrong. Please try again.',
-      });
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      allowOutsideClick: false,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`https://netflixbackend-dcnc.onrender.com/addseries/${id}`);
+          Swal.fire("Deleted!", "✅ Series has been successfully deleted!", "success");
+          setUsers(users.filter(user => user._id !== id));
+        } catch (error) {
+          console.error("Error deleting series:", error);
+          Swal.fire("Error!", "❌ Something went wrong. Please try again.", "error");
+        }
+      }
+    });
   };
 
   return (
@@ -301,7 +305,7 @@ function NewSeries() {
                     </div>
                     <div>
                       <div className='fw-medium'>Genres</div>
-                      <div className="text-secondary mt-2" style={{ fontSize: "14px" }}>{item.genres}</div>
+                      <div className="text-secondary mt-2" style={{ fontSize: "14px" }}>{item.genres.join(', ')}</div>
                     </div>
                     <div>
                       <div className='fw-medium'>Date</div>

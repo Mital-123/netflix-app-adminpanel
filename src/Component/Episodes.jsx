@@ -59,6 +59,7 @@ function Episodes() {
                 icon: 'warning',
                 title: 'Incomplete Form',
                 text: '❗Please fill all fields before submitting.',
+                allowOutsideClick: false,
             });
             return;
         }
@@ -123,15 +124,16 @@ function Episodes() {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
+            allowOutsideClick: false,
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
                     await axios.delete(`https://netflixbackend-dcnc.onrender.com/addepisode/${id}`);
-                    Swal.fire("Deleted!", "The Episode has been deleted.", "success");
+                    Swal.fire("Deleted!", "✅ The Episode has been deleted.", "success");
                     fetchEpisodeData();
                 } catch (error) {
                     console.error("Error deleting season:", error);
-                    Swal.fire("Error!", "There was an issue deleting the Episode.", "error");
+                    Swal.fire("Error!", "❌ There was an issue deleting the Episode.", "error");
                 }
             }
         });
@@ -205,7 +207,7 @@ function Episodes() {
                     <div className="text-center fw-medium shadow bg-white rounded p-3" style={{ fontSize: "14px" }}>No Episode Available.</div>
                 ) : (
                     EpisodeArray.map((item, index) => {
-                        
+
                         const thumbnailpath = item.thumbnail;
                         const videopath = item.video
                         const thumbnail = thumbnailpath.split('/').pop();
