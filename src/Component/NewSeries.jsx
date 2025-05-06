@@ -272,12 +272,12 @@ function NewSeries() {
           </div>
         )}
 
-        <div className="my-4 mx-1">
+        <div className="my-4 px-2">
           {users.length === 0 ? (
             <div className="text-center fw-medium shadow bg-white rounded p-3" style={{ fontSize: "14px" }}>No Series Available.</div>
           ) : (
             users.map((item, index) => (
-              <div className="main_hover border border-3 border-white row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
+              <div className="main_hover border border-3 border-white row p-3 mb-4 bg-white rounded overflow-hidden" key={index}>
                 {console.log(item)}
                 <div className="col-12 text-info fs-5 fw-bold mb-3 overflow-hidden">{item.title}</div>
                 <div className="col-12 overflow-hidden">

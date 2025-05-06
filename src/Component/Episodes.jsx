@@ -202,7 +202,7 @@ function Episodes() {
                 </div>
             )}
 
-            <div className='my-4 mx-1'>
+            <div className='my-4 mx-2'>
                 {EpisodeArray.length === 0 ? (
                     <div className="text-center fw-medium shadow bg-white rounded p-3" style={{ fontSize: "14px" }}>No Episode Available.</div>
                 ) : (
@@ -214,7 +214,7 @@ function Episodes() {
                         const video = videopath.split('/').pop();
 
                         return (
-                            <div className="main_hover border border-3 border-white row shadow p-3 mb-3 bg-white rounded overflow-hidden" key={index}>
+                            <div className="main_hover border border-3 border-white row p-3 mb-4 bg-white rounded overflow-hidden" key={index}>
                                 <div className='d-flex'>
                                     <div className="col-11 text-info fw-bold fs-5 mb-3 overflow-hidden">{item.title}</div>
                                     <div className="delete_episode-icon ms-auto">
