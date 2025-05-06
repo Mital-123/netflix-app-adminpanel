@@ -23,7 +23,7 @@ function Episodes() {
     const [showModal, setShowModal] = useState(false);
 
     const location = useLocation();
-    const { seriestittle } = location.state || {};
+    const { title } = location.state || {};
 
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
@@ -151,7 +151,7 @@ function Episodes() {
             </div>
 
             <div className='text-center'>
-                <h4 className='fw-bold my-3'>{seriestittle || 'Season Title'}</h4>
+                <h4 className='fw-bold text-info my-3'>{title || 'Season Title'}</h4>
             </div>
 
             {showModal && (

@@ -169,7 +169,7 @@ function AddSeason() {
     const [showModal, setShowModal] = useState(false);
 
     const location = useLocation();
-    const { seriestittle } = location.state || {};
+    const { title: seriestitle } = location.state || {};
 
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
@@ -258,9 +258,12 @@ function AddSeason() {
         });
     };
 
-    const viewepisode = (seasonid) => {
-        navigate(`/episodes/${seasonid}`);
+    const viewepisode = (seasonid, title) => {
+        navigate(`/episodes/${seasonid}`, {
+            state: { title },
+        });
     };
+
     return (
         <div className='p-4'>
             <div className='d-flex justify-content-center'>
@@ -273,7 +276,7 @@ function AddSeason() {
             </div>
 
             <div className='text-center'>
-                <h4 className='fw-bold my-3'>{seriestittle || 'Series Title'}</h4>
+                <h4 className='fw-bold text-info my-3'>{seriestitle || 'Series Title'}</h4>
             </div>
 
             {showModal && (
@@ -304,37 +307,6 @@ function AddSeason() {
                 </div>
             )}
 
-            {/* <div className='container table-responsive mt-4'>
-                <table className='table'>
-                    <thead>
-                        <tr>
-                            <th>Season</th>
-                            <th>Delete</th>
-                            <th>View</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {SeasonArray.map((item, index) => (
-                            <tr key={index}>
-                                <td style={{verticalAlign:"middle"}}>{item.title}</td>
-                                <td className='text-dark fs-1 '>
-                                    <span onClick={() => deleteSeason(item._id)} style={{ cursor: 'pointer' }}>
-                                        <RiDeleteBin5Fill />
-                                    </span>
-                                
-                                </td>
-                                <td className='text-dark fs-1'>
-                                    <span onClick={() => viewepisode(item._id)} style={{ cursor: 'pointer' }}>
-                                        <FaEye />
-                                    </span>
-                                
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div> */}
-
             <div className='container table-responsive mt-4 tablemedia'>
                 <table className='table  table-hover align-middle shadow'>
                     <thead className="table-dark">
@@ -350,7 +322,7 @@ function AddSeason() {
                                     <td className='text-center' style={{ fontSize: "14px" }}>{item.title}</td>
                                     <td className="text-center">
                                         <span
-                                            onClick={() => viewepisode(item._id)}
+                                            onClick={() => viewepisode(item._id, item.title)}
                                             style={{ cursor: 'pointer' }}
                                             className="text-primary me-3 fs-5"
                                             title="View"

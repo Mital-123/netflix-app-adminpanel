@@ -135,8 +135,10 @@ function NewSeries() {
     );
   }
 
-  const handleViewClick = (seriesId) => {
-    navigate(`/season/${seriesId}`);
+  const handleViewClick = (seriesId, title) => {
+    navigate(`/season/${seriesId}`, {
+      state: { title },
+    });
   };
 
   const handleDelete = async (id) => {
@@ -321,7 +323,7 @@ function NewSeries() {
                         <FaEye
                           className="text-primary fs-5" style={{ cursor: "pointer" }}
                           title="View"
-                          onClick={() => handleViewClick(item._id)}
+                          onClick={() => handleViewClick(item._id, item.title)}
                         />
                         <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => handleDelete(item._id)} />
                       </div>
