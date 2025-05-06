@@ -232,7 +232,6 @@ const AddMovies = () => {
                                                 <label htmlFor="" className="fw-medium">Movie Name</label>
                                                 <input
                                                     type="text"
-                                                    placeholder="Title"
                                                     value={title}
                                                     onChange={e => setTitle(e.target.value)}
                                                     className='form-control mt-1 border border-secondary w-100'
@@ -261,7 +260,6 @@ const AddMovies = () => {
                                         <div className='w-100 mt-2'>
                                             <label htmlFor="" className="fw-medium">Description</label>
                                             <textarea
-                                                placeholder="Description"
                                                 value={description}
                                                 onChange={e => setDescription(e.target.value)}
                                                 className='form-control mt-1 border border-secondary w-100'
