@@ -347,7 +347,7 @@ const AddMovies = () => {
                                                 <div className='fw-medium'>Release Date : <span className='text-secondary'>{new Date(movie.releaseDate).toLocaleDateString()}</span></div>
                                             </div>
                                             <div className='mt-2' style={{ fontSize: "15px" }}>
-                                                <div className='fw-medium'>Types : <span className='text-secondary'>{movie.types}</span></div>
+                                                <div className='fw-medium'>Types : <span className='text-secondary'>{movie.types.join(', ')}</span></div>
                                             </div>
                                             <div className='text-secondary mt-2' style={{ wordBreak: "break-all", fontSize: "14px" }}>
                                                 {movie.description}
