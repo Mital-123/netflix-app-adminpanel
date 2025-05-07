@@ -41,7 +41,6 @@ function SubScription() {
                                     ))}
                                 </ul>
                             </div>
-                            <Link className='text-decoration-none'><div className='text-decoration-underline fw-medium text-dark'>See all features</div></Link>
                         </div>
                     </div>
                 ))}
