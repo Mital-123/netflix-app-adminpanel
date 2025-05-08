@@ -237,7 +237,7 @@ function Episodes() {
                                         <div>
                                             <div className='fw-medium'>Image</div>
                                             <img
-                                                src={`https://netflixbackend-dcnc.onrender.com/uploads/${thumbnail}`}
+                                                src={item.thumbnail}
                                                 alt="thumbnail"
                                                 className='mt-2 object-fit-cover'
                                                 width={"70px"}
@@ -247,10 +247,10 @@ function Episodes() {
                                         <div>
                                             <div className='fw-medium'>Video</div>
                                             <video width={"70px"}
-                                                poster={`https://netflixbackend-dcnc.onrender.com/uploads/${thumbnail}`}
+                                                poster={item.thumbnail}
                                                 height={"70px"} controls className='mt-2'>
                                                 <source
-                                                    src={`https://netflixbackend-dcnc.onrender.com/uploads/${video}`}
+                                                    src={item.video}
                                                     type="video/mp4"
                                                 />
                                                 Your browser does not support the video tag.
