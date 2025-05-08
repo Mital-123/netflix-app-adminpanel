@@ -168,6 +168,8 @@ function AddSeason() {
     const [SeasonArray, setSeasonArray] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
+    const [loading, setLoading] = useState(true);
+
     const location = useLocation();
     const { title: seriestitle } = location.state || {};
 
@@ -175,6 +177,7 @@ function AddSeason() {
     const closeModal = () => setShowModal(false);
 
     useEffect(() => {
+        setLoading(true);
         fetchSeasonData();
     }, []);
 
@@ -186,6 +189,7 @@ function AddSeason() {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
+        setLoading(false);
     };
 
     const handleInputChange = (e) => {
@@ -233,6 +237,14 @@ function AddSeason() {
             });
         }
     };
+
+    if (loading) {
+        return (
+            <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+                <img src="https://media.tenor.com/1s1_eaP6BvgAAAAC/rainbow-spinner-loading.gif" alt="" className='img-fluid bg-white' width={150} />
+            </div>
+        );
+    }
 
     const deleteSeason = async (id) => {
         Swal.fire({
