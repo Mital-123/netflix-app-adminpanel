@@ -287,7 +287,7 @@ function NewSeries() {
                     <div>
                       <div className='fw-medium'>Image</div>
                       <img
-                        src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.thumbnail.replace(/\\/g, "/").split("uploads/")[1]}`}
+                        src={item.thumbnail}
                         alt="thumbnail"
                         width={"70px"}
                         height={"70px"}
@@ -299,7 +299,7 @@ function NewSeries() {
                       <video width={"70px"}
                         height={"70px"} controls className="mt-2">
                         <source
-                          src={`https://netflixbackend-dcnc.onrender.com/uploads/${item.video.replace(/\\/g, "/").split("uploads/")[1]}`}
+                          src={item.video}
                           type="video/mp4"
                         />
                         Your browser does not support the video tag.
