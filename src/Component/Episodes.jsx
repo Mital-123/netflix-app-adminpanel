@@ -219,10 +219,6 @@ function Episodes() {
                 ) : (
                     EpisodeArray.map((item, index) => {
 
-                        const thumbnailpath = item.thumbnail;
-                        const videopath = item.video
-                        const thumbnail = thumbnailpath.split('/').pop();
-                        const video = videopath.split('/').pop();
 
                         return (
                             <div className="main_hover border border-3 border-white row p-3 mb-4 bg-white rounded overflow-hidden" key={index}>
