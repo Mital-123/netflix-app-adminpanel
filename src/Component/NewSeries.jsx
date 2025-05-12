@@ -278,60 +278,66 @@ function NewSeries() {
           {users.length === 0 ? (
             <div className="text-center fw-medium shadow bg-white rounded p-3" style={{ fontSize: "14px" }}>No Series Available.</div>
           ) : (
-            users.map((item, index) => (
-              <div className="main_hover border border-3 border-white row p-3 mb-4 bg-white rounded overflow-hidden" key={index}>
-                {console.log(item)}
-                <div className="col-12 text-info fs-5 fw-bold mb-3 overflow-hidden">{item.title}</div>
-                <div className="col-12 overflow-hidden">
-                  <div className="d-flex justify-content-between flex-wrap flex-lg-nowrap gap-4">
-                    <div>
-                      <div className='fw-medium'>Image</div>
-                      <img
-                        src={item.thumbnail}
-                        alt="thumbnail"
-                        width={"70px"}
-                        height={"70px"}
-                        className="mt-2 object-fit-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className='fw-medium'>Video</div>
-                      <video width={"70px"}
-                        height={"70px"} controls className="mt-2">
-                        <source
-                          src={item.video}
-                          type="video/mp4"
+            users.map((item, index) => {
+              const thumbnailpath = item.thumbnail;
+              const videopath = item.video
+              const thumbnail = thumbnailpath.split('/').pop();
+              const video = videopath.split('/').pop();
+              return (
+                <div className="main_hover border border-3 border-white row p-3 mb-4 bg-white rounded overflow-hidden" key={index}>
+                  {console.log(item)}
+                  <div className="col-12 text-info fs-5 fw-bold mb-3 overflow-hidden">{item.title}</div>
+                  <div className="col-12 overflow-hidden">
+                    <div className="d-flex justify-content-between flex-wrap flex-lg-nowrap gap-4">
+                      <div>
+                        <div className='fw-medium'>Image</div>
+                        <img
+                          src={`https://netflixbackend-dcnc.onrender.com/uploads/${thumbnail}`}
+                          alt="thumbnail"
+                          width={"70px"}
+                          height={"70px"}
+                          className="mt-2 object-fit-cover"
                         />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                    <div>
-                      <div className='fw-medium'>Genres</div>
-                      <div className="text-secondary mt-2" style={{ fontSize: "14px" }}>{item.genres.join(', ')}</div>
-                    </div>
-                    <div>
-                      <div className='fw-medium'>Date</div>
-                      <div className="text-secondary mt-2" style={{ fontSize: "14px" }}>{new Date(item.releaseDate).toLocaleDateString()}</div>
-                    </div>
-                    <div>
-                      <div className='fw-medium'>Description</div>
-                      <div className="text-secondary mt-2" style={{ fontSize: "14px", wordBreak: "break-all" }}>{item.description}</div>
-                    </div>
-                    <div>
-                      <div className='fw-medium'>Action</div>
-                      <div className="d-flex justify-content-center gap-2 mt-2">
-                        <FaEye
-                          className="text-primary fs-5" style={{ cursor: "pointer" }}
-                          title="View"
-                          onClick={() => handleViewClick(item._id, item.title)}
-                        />
-                        <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => handleDelete(item._id)} />
+                      </div>
+                      <div>
+                        <div className='fw-medium'>Video</div>
+                        <video width={"70px"}
+                          height={"70px"} controls className="mt-2">
+                          <source
+                            src={`https://netflixbackend-dcnc.onrender.com/uploads/${video}`}
+                            type="video/mp4"
+                          />
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                      <div>
+                        <div className='fw-medium'>Genres</div>
+                        <div className="text-secondary mt-2" style={{ fontSize: "14px" }}>{item.genres.join(', ')}</div>
+                      </div>
+                      <div>
+                        <div className='fw-medium'>Date</div>
+                        <div className="text-secondary mt-2" style={{ fontSize: "14px" }}>{new Date(item.releaseDate).toLocaleDateString()}</div>
+                      </div>
+                      <div>
+                        <div className='fw-medium'>Description</div>
+                        <div className="text-secondary mt-2" style={{ fontSize: "14px", wordBreak: "break-all" }}>{item.description}</div>
+                      </div>
+                      <div>
+                        <div className='fw-medium'>Action</div>
+                        <div className="d-flex justify-content-center gap-2 mt-2">
+                          <FaEye
+                            className="text-primary fs-5" style={{ cursor: "pointer" }}
+                            title="View"
+                            onClick={() => handleViewClick(item._id, item.title)}
+                          />
+                          <RiDeleteBin5Fill className="text-danger fs-5" style={{ cursor: "pointer" }} title="Delete" onClick={() => handleDelete(item._id)} />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))
+                </div>)
+            }
+            )
           )}
         </div>
 
