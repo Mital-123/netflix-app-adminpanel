@@ -21,7 +21,6 @@ function Episodes() {
     });
     const [EpisodeArray, setEpisodeArray] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     const location = useLocation();
     const { title } = location.state || {};
@@ -30,7 +29,6 @@ function Episodes() {
     const closeModal = () => setShowModal(false);
 
     useEffect(() => {
-        setLoading(true);
         fetchEpisodeData();
     }, []);
 
@@ -42,7 +40,6 @@ function Episodes() {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
-        setLoading(false);
     };
 
     const handleInputChange = (e) => {
@@ -117,14 +114,6 @@ function Episodes() {
             });
         }
     };
-
-    if (loading) {
-        return (
-            <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-                <img src="https://media.tenor.com/1s1_eaP6BvgAAAAC/rainbow-spinner-loading.gif" alt="" className='img-fluid bg-white' width={150} />
-            </div>
-        );
-    }
 
     const deleteSeason = async (id) => {
         Swal.fire({
@@ -219,6 +208,10 @@ function Episodes() {
                 ) : (
                     EpisodeArray.map((item, index) => {
 
+                        const thumbnailpath = item.thumbnail;
+                        const videopath = item.video
+                        const thumbnail = thumbnailpath.split('/').pop();
+                        const video = videopath.split('/').pop();
 
                         return (
                             <div className="main_hover border border-3 border-white row p-3 mb-4 bg-white rounded overflow-hidden" key={index}>
@@ -233,7 +226,7 @@ function Episodes() {
                                         <div>
                                             <div className='fw-medium'>Image</div>
                                             <img
-                                                src={item.thumbnail}
+                                                src={`https://netflixbackend-dcnc.onrender.com/uploads/${thumbnail}`}
                                                 alt="thumbnail"
                                                 className='mt-2 object-fit-cover'
                                                 width={"70px"}
@@ -243,10 +236,10 @@ function Episodes() {
                                         <div>
                                             <div className='fw-medium'>Video</div>
                                             <video width={"70px"}
-                                                poster={item.thumbnail}
+                                                poster={`https://netflixbackend-dcnc.onrender.com/uploads/${thumbnail}`}
                                                 height={"70px"} controls className='mt-2'>
                                                 <source
-                                                    src={item.video}
+                                                    src={`https://netflixbackend-dcnc.onrender.com/uploads/${video}`}
                                                     type="video/mp4"
                                                 />
                                                 Your browser does not support the video tag.
