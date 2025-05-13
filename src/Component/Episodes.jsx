@@ -205,7 +205,7 @@ function Episodes() {
                                         </div>
                                     </div>
                                     <div className="mt-4 text-center">
-                                        <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={AddEpisodeSaveData}>Save</button>
+                                        <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={AddEpisodeSaveData}>Submit</button>
                                     </div>
                                 </form>
                             </div>
