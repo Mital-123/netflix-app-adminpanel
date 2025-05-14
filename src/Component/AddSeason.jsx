@@ -277,7 +277,7 @@ function AddSeason() {
     };
 
     return (
-        <div className='p-4'>
+        <div className='container p-4'>
             <div className='d-flex justify-content-center'>
                 <div className='d-none d-md-block d-lg-block'>
                     <h3 className='fw-bold'>Season List</h3>
