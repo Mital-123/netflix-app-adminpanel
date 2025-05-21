@@ -9,6 +9,7 @@ import NewSeries from './Component/NewSeries';
 import Episodes from './Component/Episodes';
 import AddMovies from './Component/AddMovies';
 import SubScription from './Component/SubScription';
+import UserData from './Component/UserData';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                     <Route path="/episodes/:id" element={<Episodes />} />
                     <Route path="/movies" element={<AddMovies />} />
                     <Route path="/subscription" element={<SubScription />} />
+                    <Route path='/users' element={<UserData/>}/>
                   </Routes>
                 </div>
               </>

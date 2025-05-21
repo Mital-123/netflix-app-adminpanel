@@ -173,3 +173,8 @@ textarea.form-control:focus {
   border: 1px solid black !important;
 }
 /* SubScription end */
+/* user start */
+#tdlist {
+font-size: 13px;
+}
+/* user end */
