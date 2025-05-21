@@ -40,7 +40,7 @@
 //       }
 //     });
 //   };
-  
+
 //   return (
 //     <div style={{ padding: '20px' }}>
 //      <div><h3 className='fw-bold text-center'>User Data</h3></div>
@@ -126,11 +126,11 @@ function UserData() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="container p-4">
       <h3 className='fw-bold text-center'>User Data</h3>
 
-      <div className='table-responsive'>
-        <table className='table table-bordered table-hover  table-striped'>
+      <div className='table-responsive mt-3'>
+        <table className='table table-bordered table-hover table-striped'>
           <thead className='table-dark' >
             <tr>
               <th className='text-info fw-bold'>No.</th>
