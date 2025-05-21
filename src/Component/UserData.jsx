@@ -131,7 +131,7 @@ function UserData() {
 
       <div >
         <table className='table table-bordered table-hover table-responsive table-striped'>
-          <thead className='table-dark'>
+          <thead className='table-dark' style={{ position: 'sticky', top: 0, zIndex: 1 }}>
             <tr>
               <th className='text-info fw-bold'>No.</th>
               <th className='text-info fw-bold'>ID</th>
