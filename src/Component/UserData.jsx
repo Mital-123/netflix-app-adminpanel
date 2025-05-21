@@ -129,9 +129,9 @@ function UserData() {
     <div style={{ padding: '20px' }}>
       <h3 className='fw-bold text-center'>User Data</h3>
 
-      <div >
-        <table className='table table-bordered table-hover table-responsive table-striped'>
-          <thead className='table-dark' style={{ position: 'sticky', top: 0, zIndex: 1 }}>
+      <div className='table-responsive'>
+        <table className='table table-bordered table-hover  table-striped'>
+          <thead className='table-dark' >
             <tr>
               <th className='text-info fw-bold'>No.</th>
               <th className='text-info fw-bold'>ID</th>
