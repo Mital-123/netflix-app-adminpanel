@@ -149,7 +149,7 @@ function UserData() {
         <table className='table table-bordered table-hover table-striped'>
           <thead className='table-dark' >
             <tr>
-              <th className='text-info fw-bold'>No.</th>
+              <th className='text-info fw-bold'>Sr. No.</th>
               <th className='text-info fw-bold'>ID</th>
               <th className='text-info fw-bold'>Username</th>
               <th className='text-info fw-bold'>Email</th>
@@ -177,7 +177,7 @@ function UserData() {
               ))
             ) : (
               <tr>
-                <td colSpan="8" style={{ textAlign: 'center' }}>No users found.</td>
+                <td colSpan="8" className='p-2 fw-medium' style={{ textAlign: 'center' }}>No Users Found.</td>
               </tr>
             )}
           </tbody>
