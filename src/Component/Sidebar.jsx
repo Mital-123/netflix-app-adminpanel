@@ -27,16 +27,6 @@ function Sidebar() {
                 <Nav className="flex-column p-2 pt-0">
                     <Nav.Item className="mt-3">
                         <Link
-                            to="/users"
-                            className="text-decoration-none nav-item text-white"
-                            onClick={handleLinkClick}
-                        >
-                            <FaUsersLine className="me-2" />
-                            <span className="sidebar_menu">Users</span>
-                        </Link>
-                    </Nav.Item>
-                    <Nav.Item className="mt-3">
-                        <Link
                             to="/series"
                             className="text-decoration-none nav-item text-white"
                             onClick={handleLinkClick}
@@ -65,6 +55,16 @@ function Sidebar() {
                             <span className="sidebar_menu">Subscription</span>
                         </Link>
                     </Nav.Item>
+                    <Nav.Item className="mt-3">
+                        <Link
+                            to="/users"
+                            className="text-decoration-none nav-item text-white"
+                            onClick={handleLinkClick}
+                        >
+                            <FaUsersLine className="me-2" />
+                            <span className="sidebar_menu">Users</span>
+                        </Link>
+                    </Nav.Item>
                 </Nav>
                 <div className="logout-btn">
                     <button type='button' className="bg-info button_main button--aylen button--border-thin button--round-s fw-bold py-2 px-3 rounded-2" onClick={logout}>Log Out</button>
@@ -82,16 +82,6 @@ function Sidebar() {
                         <h2 className='text-white'>Admin Panel</h2>
                     </div>
                     <Nav className="flex-column p-2">
-                        <Nav.Item className="mt-3">
-                            <Link
-                                to="/users"
-                                className="text-decoration-none nav-item text-white"
-                                onClick={handleLinkClick}
-                            >
-                                <FaUsersLine className="me-2" />
-                                <span className="sidebar_menu">Users</span>
-                            </Link>
-                        </Nav.Item>
                         <Nav.Item className="mt-3">
                             <Link
                                 to="/series"
@@ -120,6 +110,16 @@ function Sidebar() {
                             >
                                 <MdSubscriptions className="me-2" />
                                 <span className="sidebar_menu">Subscription</span>
+                            </Link>
+                        </Nav.Item>
+                        <Nav.Item className="mt-3">
+                            <Link
+                                to="/users"
+                                className="text-decoration-none nav-item text-white"
+                                onClick={handleLinkClick}
+                            >
+                                <FaUsersLine className="me-2" />
+                                <span className="sidebar_menu">Users</span>
                             </Link>
                         </Nav.Item>
                     </Nav>

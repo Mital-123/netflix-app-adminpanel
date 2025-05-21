@@ -30,9 +30,9 @@ function App() {
                 <Sidebar />
                 <div className='main-content flex-grow-1'>
                   <Routes>
-                    <Route path="/" element={<UserData setlogin={setlogin} />} />
-                    <Route path='/users' element={<UserData />} />
+                    <Route path="/" element={<NewSeries setlogin={setlogin} />} />
                     <Route path="/series" element={<NewSeries setlogin={setlogin} />} />
+                    <Route path='/users' element={<UserData />} />
                     <Route path="/season/:id" element={<AddSeason />} />
                     <Route path="/episodes/:id" element={<Episodes />} />
                     <Route path="/movies" element={<AddMovies />} />

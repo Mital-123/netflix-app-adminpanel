@@ -139,7 +139,7 @@ function Login(props) {
             if (foundUser) {
                 localStorage.setItem("login", true);
                 props.setlogin(true);
-                window.location.href = "/users";
+                window.location.href = "/series";
             } else {
                 setApiError("Invalid email or password. Please try again.");
             }
