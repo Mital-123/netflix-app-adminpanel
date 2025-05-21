@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function Register() {
 
@@ -146,6 +147,13 @@ function Register() {
                 }
             });
             console.log(res.data);
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfull',
+                text: '✅ Registration successfully!',
+                timer: 500,
+                showConfirmButton: false,
+            });
             fetchUsers();
             setobj({ ...blankobj });
             setProfilePreview(null);
@@ -153,6 +161,11 @@ function Register() {
             navigate("/");
         } catch (err) {
             console.error("Error during registration:", err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration Failed',
+                text: '❌ Something went wrong. Please try again.',
+            });
         }
     };
 
