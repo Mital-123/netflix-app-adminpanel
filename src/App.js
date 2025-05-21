@@ -10,6 +10,7 @@ import Episodes from './Component/Episodes';
 import AddMovies from './Component/AddMovies';
 import SubScription from './Component/SubScription';
 import UserData from './Component/UserData';
+import Register from './Component/Register';
 
 function App() {
 
@@ -29,13 +30,13 @@ function App() {
                 <Sidebar />
                 <div className='main-content flex-grow-1'>
                   <Routes>
-                    <Route path="/" element={<NewSeries setlogin={setlogin} />} />
+                    <Route path="/" element={<UserData setlogin={setlogin} />} />
+                    <Route path='/users' element={<UserData />} />
                     <Route path="/series" element={<NewSeries setlogin={setlogin} />} />
                     <Route path="/season/:id" element={<AddSeason />} />
                     <Route path="/episodes/:id" element={<Episodes />} />
                     <Route path="/movies" element={<AddMovies />} />
                     <Route path="/subscription" element={<SubScription />} />
-                    <Route path='/users' element={<UserData/>}/>
                   </Routes>
                 </div>
               </>
@@ -44,6 +45,7 @@ function App() {
                 <div className='main_login flex-grow-1'>
                   <Routes>
                     <Route path="/" element={<Login setlogin={setlogin} />} />
+                    <Route path="/register" element={<Register />} />
                     <Route path="*" element={<Login setlogin={setlogin} />} />
                   </Routes>
                 </div>
