@@ -43,7 +43,7 @@ function UserData() {
   
   return (
     <div style={{ padding: '20px' }}>
-     <div><h3 className='fw-bold text-center'>Series List</h3></div>
+     <div><h3 className='fw-bold text-center'>User Data</h3></div>
       <table className='table table-border table-hover table-responsive table-striped' border="1" cellPadding="10" cellSpacing="0" style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead >
           <tr >
