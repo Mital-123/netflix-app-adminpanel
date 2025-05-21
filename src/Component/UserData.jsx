@@ -65,7 +65,7 @@ function UserData() {
                 <td>{user._id}</td>
                 <td>{user.email}</td>
                 <td>{user.name}</td>
-            <td>subscription</td>
+            <td>{user.subscription}</td>
                 <td>{new Date(user.createdAt).toLocaleString()}</td>
                 <td>Active</td>
                 <td className='text-danger text-center fs-6' onClick={() => handleDelete(user._id)} style={{ cursor: "pointer" }}><RiDeleteBin5Fill/></td>
