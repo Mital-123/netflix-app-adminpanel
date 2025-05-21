@@ -83,23 +83,39 @@
 // }
 
 // export default UserData;
+
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 
 function UserData() {
+
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     axios.get('https://netflixbackend-dcnc.onrender.com/users')
       .then(response => {
         setUsers(response.data);
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+        <img src="https://media.tenor.com/1s1_eaP6BvgAAAAC/rainbow-spinner-loading.gif" alt="" className='img-fluid bg-white' width={150} />
+      </div>
+    );
+  }
 
   const handleDelete = async (id) => {
     Swal.fire({
