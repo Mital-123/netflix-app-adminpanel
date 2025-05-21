@@ -151,11 +151,11 @@ function UserData() {
             <tr>
               <th className='text-info fw-bold'>No.</th>
               <th className='text-info fw-bold'>ID</th>
-              <th className='text-info fw-bold'>Email</th>
               <th className='text-info fw-bold'>Username</th>
+              <th className='text-info fw-bold'>Email</th>
               <th className='text-info fw-bold'>Subscription</th>
               <th className='text-info fw-bold'>Join Date</th>
-              <th className='text-info fw-bold'>Status</th>
+              {/* <th className='text-info fw-bold'>Status</th> */}
               <th className='text-info fw-bold'>Action</th>
             </tr>
           </thead>
@@ -165,11 +165,11 @@ function UserData() {
                 <tr key={user._id || index} id='tdlist'>
                   <td>{index + 1}</td>
                   <td>{user._id}</td>
-                  <td>{user.email}</td>
                   <td>{user.name}</td>
+                  <td>{user.email}</td>
                   <td>{user.subscription}</td>
                   <td>{new Date(user.createdAt).toLocaleString()}</td>
-                  <td>Active</td>
+                  {/* <td>Active</td> */}
                   <td className='text-danger text-center fs-6' onClick={() => handleDelete(user._id)} style={{ cursor: "pointer" }}>
                     <RiDeleteBin5Fill />
                   </td>
